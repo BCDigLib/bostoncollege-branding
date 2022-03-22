@@ -1,0 +1,15 @@
+en:
+  user_defined: &user_defined_attributes
+    string_1: Main Office Number
+    string_2: BC Archives Record Group
+    string_3: IMC Print Indicator (Y/N)
+    text_4: File Maker Migration Data
+  brand:
+    title: Search Burns Archives DEV
+    home: Home
+    welcome_head: Welcome to Search Burns Archives DEV
+    welcome_message: Welcome to Search Burns Archives
+  welcome:
+    heading: Welcome to BC Libraries ArchivesSpace
+    message: For use by authorized staff.
+    message_logged_in: You are now logged in to the staff interface.
