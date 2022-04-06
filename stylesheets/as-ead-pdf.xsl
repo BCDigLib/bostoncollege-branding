@@ -239,6 +239,10 @@
             <xsl:if test="ead:subtitle">
                 <fo:block font-size="16" font-weight="bold"><xsl:apply-templates select="ead:subtitle"/></fo:block>
             </xsl:if>
+            <!-- BC begin customization -->
+            <!-- purpose: include handle URL on titlepage -->
+            <fo:block font-size="16" font-weight="bold" margin-top=".125in"><xsl:value-of select="preceding::ead:eadid/@url"/></fo:block>
+            <!-- BC end customization -->
         </fo:block>
         <!-- BC begin customization -->
         <!-- purpose: hide controlled access headings -->
