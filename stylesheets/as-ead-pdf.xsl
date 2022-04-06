@@ -241,6 +241,7 @@
             </xsl:if>
         </fo:block>
         <!-- BC begin customization -->
+        <!-- purpose: hide controlled access headings -->
         <!--
         <fo:block margin-top="8pt">
             <xsl:apply-templates select="/ead:ead/ead:eadheader/ead:profiledesc"/>
@@ -280,7 +281,7 @@
     <xsl:template name="icon">
       <fo:block-container max-width="6.5in" max-height="4in">
         <!-- BC begin customization -->
-        <!--fo:block text-align="left"-->
+        <!-- purpose: center logo image on title page -->
         <fo:block text-align="center">
         <!-- BC end customization -->
             <fo:external-graphic content-width="scale-down-to-fit"
@@ -341,11 +342,16 @@
                 </fo:bookmark>
             </xsl:if>
 
+            <!-- BC begin customization -->
+            <!-- purpose: hide controlled access headings -->
+            <!--
             <xsl:if test="ead:controlaccess">
                 <fo:bookmark internal-destination="{local:buildID(ead:controlaccess[1])}">
                     <fo:bookmark-title><xsl:value-of select="local:tagName(ead:controlaccess[1])"/></fo:bookmark-title>
                 </fo:bookmark>
             </xsl:if>
+            -->
+            <!-- BC end customization -->
             <xsl:if test="ead:otherfindaid">
                 <fo:bookmark internal-destination="{local:buildID(ead:otherfindaid[1])}">
                     <fo:bookmark-title><xsl:value-of select="local:tagName(ead:otherfindaid[1])"/></fo:bookmark-title>
@@ -489,6 +495,9 @@
                     </fo:block>
                 </xsl:if>
 
+                <!-- BC begin customization -->
+                <!-- purpose: hide controlled access headings -->
+                <!--
                 <xsl:if test="ead:controlaccess">
                     <fo:block text-align-last="justify">
                         <fo:basic-link internal-destination="{local:buildID(ead:controlaccess[1])}"><xsl:value-of select="local:tagName(ead:controlaccess[1])"/></fo:basic-link>
@@ -498,6 +507,8 @@
                         <fo:page-number-citation ref-id="{local:buildID(ead:controlaccess[1])}"/>
                     </fo:block>
                 </xsl:if>
+                -->
+                <!-- BC end customization -->
                 <xsl:if test="ead:otherfindaid">
                     <fo:block text-align-last="justify">
                         <fo:basic-link internal-destination="{local:buildID(ead:otherfindaid[1])}"><xsl:value-of select="local:tagName(ead:otherfindaid[1])"/></fo:basic-link>
@@ -632,8 +643,12 @@
                     <xsl:call-template name="toc"/>
                 </fo:block>
             </xsl:if>
-
+            <!-- BC begin customization -->
+            <!-- purpose: hide controlled access headings -->
+            <!--
             <xsl:apply-templates select="ead:controlaccess"/>
+            -->
+            <!-- BC end customization -->
             <xsl:apply-templates select="ead:otherfindaid"/>
             <xsl:apply-templates select="ead:phystech"/>
             <xsl:apply-templates select="ead:odd"/>
