@@ -240,12 +240,16 @@
                 <fo:block font-size="16" font-weight="bold"><xsl:apply-templates select="ead:subtitle"/></fo:block>
             </xsl:if>
         </fo:block>
+        <!-- BC begin customization -->
+        <!--
         <fo:block margin-top="8pt">
             <xsl:apply-templates select="/ead:ead/ead:eadheader/ead:profiledesc"/>
         </fo:block>
         <fo:block margin-top="8pt">
             <xsl:apply-templates select="/ead:ead/ead:eadheader/ead:filedesc/ead:editionstmt"/>
         </fo:block>
+        -->
+        <!-- BC end customization -->
     </xsl:template>
     <xsl:template match="ead:publicationstmt" mode="coverPage">
         <fo:block margin="0 1in">
