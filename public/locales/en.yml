@@ -8,7 +8,11 @@ en:
     title: Search Burns Archives DEV
     home: Home
     welcome_head: Welcome to Search Burns Archives DEV
-    welcome_message: Welcome to Search Burns Archives
+    welcome_message: |
+        Our reference team is happy to assist your research. We strongly encourage you to search <a href="https://bc-primo.hosted.exlibrisgroup.com/primo-explore/search?tab=bcl_only&search_scope=lib_BURNS&vid=bclib_new&lang=en_US&offset=0&mode=advanced" target="_blank" rel="noopener noreferrer">the library catalog</a> to get more information on items you might wish to use. For more on this, see <a href="https://libguides.bc.edu/burns/services/find" target="_blank" rel="noopener noreferrer">Finding Burns Material</a>. To get help navigating our catalog and finding aids, or to request a more in-depth consultation with our reference staff, please <a href="https://libguides.bc.edu/burns/contact" target="_blank" rel="noopener noreferrer">send us an email</a>.  We are also available at 617-552-4861.<br/></br>
+        If you are planning to use our materials, please view our <a href="https://libguides.bc.edu/burns/services/reading-room" target="_blank" rel="noopener noreferrer">reading room policies</a> for general information for researchers. Be sure to <a href="http://libguides.bc.edu/hours" target="_blank" rel="noopener noreferrer">check our hours</a> when planning a visit.<br/></br>
+        If you cannot visit us in person, we're happy to provide assistance. We can provide reference help and fulfill scan requests, but, due to staff limitations, we are not able to provide in-depth research.<br/></br>
+        <a href="https://answers.bc.edu/search/?t=0&g=1644&topics=Burns%20Library&adv=1" target="_blank" rel="noopener noreferrer">FAQ</a>
   welcome:
     heading: Welcome to BC Libraries ArchivesSpace
     message: For use by authorized staff.

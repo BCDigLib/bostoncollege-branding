@@ -1,16 +1,73 @@
+/* Define basic styles (fonts, colors) for HTML elements */ 
+
+body {
+    font-family: 'Open Sans', Arial, sans-serif;
+        color: #000;
+}	
 
 
-/*Style for Burns header to distinguish fronm h1*/
+ h1, h2, h3, h4, h5, h6 {
+    
+    font-family: 'Open Sans', Arial, sans-serif;
+    color: #000;
+}
+
+
+/*Match header sizes to Library Website. Using ems here to match ASpace */
+h1 {
+    font-size: 2.1em;
+    font-weight: normal;
+    margin: 0 0 10px;
+    padding: 0;
+}
+
+h2 {
+    font-size: 1.7em;
+    font-weight: 200;
+}
+
+
+h3 {
+    font-size: 1.4em;
+    font-weight: 200;
+}
+
+
+h4 {
+    font-size: 1.3em;
+    font-weight: 400;
+}
+
+
+h5 {
+    font-size: 1.1em;
+    font-weight: 600;
+}
+
+
+h6 {
+    font-size: 1em;
+    font-weight: 700;
+}
+
+ /*Set links to correct blue*/
+ a {
+    color: #2f7ab9; /* BC link color */
+}
+
+
+/*Style for Burns header - can't use regaular h color on modified header row*/
 .header-title, .header-title a {
     color: #fff;
     font-family: 'Open Sans', Arial, sans-serif;
-    font-size: 24px;
+    font-size: 20px;
     font-weight: 200;
 }
 
 /*Set header color to Library black, reduce height and remove blue lower border*/
 #header > .row {
     background-color: rgba(16,14,15,0.85);
+    padding-left: 0px;
     border-bottom: none;
     height: 2.5rem;
 }
@@ -22,14 +79,19 @@
     border-bottom: none;
 }
 
-/*note white color of navbar, as Librray header color has transparency*/
+/*Need white color for navbar, as Library header color has transparency*/
 .navbar-default {
     background-color: #fff;
     border: none;
+    }
+
+/*Get rid of pesky borders on different navbar states*/
+.navbar-default .navbar-collapse, .navbar-default, .navbar-form {
+    border-color: rgba(16,14,15,0.85);
 }
 
 
-/*nav link color*/
+/* Set nav link color*/
 .navbar-default .navbar-nav > li > a {
     color: #fff;
 }
@@ -51,10 +113,11 @@
     background-color: #fff;
 }
 
-/*These are CSS overrides for the buttons. Need to also look at pills, pagination etc.*/
+/*These are CSS overrides for the buttons*/
 .btn-primary {
     background-color: #8a100b;
     color: #fff;
+    border-color: #8a100b;
 }
 
 .btn-primary:disabled {
@@ -75,61 +138,73 @@
 color:#dccaa0;
 }
 
+
+/*Pagination button highlight and link color*/
+
+ .pagination > li > a {
+        color:  #2f7ab9
+    }
+
+
+ .pagination > .active > a {
+        background-color: #8a100b;
+        border-color: #ddd;
+    }
+
+ .pagination > .active > a:hover {
+        background-color: #b30000;
+        color: #dccaa0;
+        border-color: #ddd;
+        text-decoration: none;
+    }
+
+
+/*Tab pills for Collection overview and organziation*/
+
+ .tabbing.nav-pills > li > a {
+	background-color: #8a100b;
+    }
+
+
+/*Set the labels font closer to bc font and weight*/
+   .record-type-badge, .identifier .id-label, .inline-label {
+	  font-family: 'Open Sans Condensed',Helvetica,Arial,sans-serif;
+	  font-weight: 600;
+  }
+
+
+/*Make record type colors bc and accessible*/
+
+ .record-type-badge.resource, .record-type-top_container {
+	 color: #b29d6c;
+	 border-color: #b29d6c;
+ }
+
+ .record-type-badge.digital_object, .record-type-badge.accession, .record-type-badge.archival_object {
+         color: #8a100b;
+         border-color: #8a100b;
+ }
+
+ .record-type-badge.agent {
+         color: #726158;
+         border-color: #726158;
+ }
+
+
+ /*Make the badge icons more prominent*/
+
+ .record-type-badge i {
+	 font-size: 20px;
+	 vertical-align: middle;
+ }
+
+
 /*Set footer color to white*/
 .panel-footer {
     background-color: #fff;
 }
 
- /*Set links to correct blue*/
- a {
-    color: #2f7ab9; /* BC link color */
-}
-
-
-/*Only setting headertext color, size, weight*/
- h1, h2, h3, h4, h5, h6 {
-    
-    font-family: 'Open Sans', Arial, sans-serif;
-    color: #000;
-}
-
-  /*Match header sizes to Library Website*/
-    h1 {
-        font-size: 30px;
-        font-weight: normal;
-        margin: 0 0 10px;
-        padding: 0;
-    }
-    
-    h2 {
-        font-size: 24px;
-        font-weight: 200;
-    }
-    
-    
-    h3 {
-        font-size: 20px;
-        font-weight: 200;
-    }
-    
-    
-    h4 {
-        font-size: 18px;
-        font-weight: 400;
-    }
-    
-    
-    h5 {
-        font-size: 16px;
-        font-weight: 600;
-    }
-    
-    
-    h6 {
-        font-size: 14px;
-        font-weight: 700;
-    }
-
+  
 
 /*Modifications to Digital Object thumbnail and caption*/
 
@@ -161,6 +236,7 @@ color:#dccaa0;
     }
 }
 
+
 /*Override style to allow panel to be displayed within anchor tag*/
 .panel-link {
     padding: 10px 15px;
@@ -178,8 +254,11 @@ color:#dccaa0;
  overflow: hidden;
 }
 
+
+
+/*Section for collection overview customizations */
+
 /* add right margin to request button */
 .infinite-item {
   margin-right: 20px;
 }
-
