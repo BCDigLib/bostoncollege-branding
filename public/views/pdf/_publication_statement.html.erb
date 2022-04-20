@@ -1,3 +1,8 @@
+<%#
+  # most recent file version: v3.2.0
+  # https://github.com/archivesspace/archivesspace/blob/v3.2.0/public/app/views/pdf/_publication_statement.html.erb
+%>
+
 <div class="repository-information">
     <div class="repository-name"><%= repository_name %></div>
 
@@ -12,13 +17,15 @@
         <% end %>
     </div>
 
+    <%# BEGIN BC EDIT - Include telephone number. %>
     <% if repository_information['telephones'] && repository_information['telephones'].length %>
-	<% repository_information['telephones'].each do |tel| %>
+        <% repository_information['telephones'].each do |tel| %>
             <% if tel.key?("number_type") && tel.key?("number") %>
-	        <div class="repository-telephone"><span class="repository-telephone-type"><%= tel["number_type"] %></span> Number: <%= tel["number"] %></div>
+                <div class="repository-telephone"><span class="repository-telephone-type"><%= tel["number_type"] %></span> Number: <%= tel["number"] %></div>
             <% end %>
         <% end %>
     <% end %>
+    <%# END BC EDIT %>
 
     <% if repository_information['email'] %>
         <div class="repository-email"><a href="mailto:<%= repository_information['email'] %>"><%= repository_information['email'] %></a></div>

@@ -1,3 +1,8 @@
+<%#
+  # most recent file version: v3.2.0
+  # https://github.com/archivesspace/archivesspace/blob/v3.2.0/frontend/app/views/top_containers/bulk_operations/_results.html.erb
+%>
+
 <% can_edit = user_can?("update_container_record") %>
 
 <%
@@ -71,7 +76,7 @@
         </td>
         <td class="top-container-profile"><%= Array(doc['container_profile_display_string_u_sstr']).first %></td>
         <td class="top-container-indicator">
-          <!-- BEGIN BC EDIT - Check if the accession was migrated. -->
+          <%# BEGIN BC EDIT - Check if the accession was migrated. %>
           <% if container_json.dig("container_locations", 0, "note").nil? || container_json.dig("collection", 0, "ref").nil? %>
             <% if container_json['type'] && container_json['type'] != 'item' && container_json['type'] != 'object' %>
               <%= container_json['type'] %>
@@ -84,7 +89,7 @@
           <% else %>
             <%= container_json['indicator'] %>
           <% end %>
-          <!-- END BC EDIT -->
+          <%# END BC EDIT %>
         </td>
         <td class="top-container-barcode"><%= container_json['barcode'] %></td>
         <td class="top-container-current-location">

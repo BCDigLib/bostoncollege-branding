@@ -1,6 +1,13 @@
+<%#
+  # most recent file version: v3.2.0
+  # https://github.com/archivesspace/archivesspace/blob/v3.2.0/public/app/views/shared/_digital.html.erb
+%>
+
 <%# expects 'dig_objs' as an array of hashes %>
 <% unless dig_objs.blank? %>
+<%# BEGIN BC EDIT - add col sizing %>
 <div class="images col-sm-3 col-md-3 col-lg-2">
+<%# END BC EDIT %>
   <% dig_objs.each do |d_file| %>
     <% if !d_file['out'].blank? %>
       <% if d_file['thumb'].blank? %>
@@ -24,9 +31,11 @@
           <div class="panel panel-default">
             <a class="thumbnail" href="<%= d_file['out'] %>" target="new" title="<%= t('digital_object._public.link')%>">
               <img src="<%= d_file['thumb'] %>" alt="<%= strip_mixed_content(d_file['caption'] || t('enumerations.instance_instance_type.digital_object')) %>" />     
-	          <div class="panel-link">
-	            <%= t('digital_object._public.link').html_safe %>
-	          </div>
+	            <%# BEGIN BC EDIT - include link to DAO %>
+              <div class="panel-link">
+	              <%= t('digital_object._public.link').html_safe %>
+	            </div>
+              <%# END BC EDIT %>
             </a>
           </div>
         </div>
