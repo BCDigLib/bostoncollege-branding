@@ -18,6 +18,10 @@
         *                                                                 *
         *******************************************************************
     -->
+    <!-- 
+        # most recent file version: v3.2.0
+        # https://github.com/archivesspace/archivesspace/blob/v3.2.0/stylesheets/as-ead-pdf.xsl
+    -->
     <xsl:output method="xml" encoding="utf-8" indent="yes"/>
 
     <!-- Calls a stylesheet with local functions and lookup lists for languages and subject authorities -->
@@ -239,13 +243,11 @@
             <xsl:if test="ead:subtitle">
                 <fo:block font-size="16" font-weight="bold"><xsl:apply-templates select="ead:subtitle"/></fo:block>
             </xsl:if>
-            <!-- BC begin customization -->
-            <!-- purpose: include handle URL on titlepage -->
+            <!-- BEGIN BC EDIT - include handle URL on titlepage. -->
             <fo:block font-size="16" font-weight="bold" margin-top=".125in"><xsl:value-of select="preceding::ead:eadid/@url"/></fo:block>
-            <!-- BC end customization -->
+            <!-- END BC EDIT -->
         </fo:block>
-        <!-- BC begin customization -->
-        <!-- purpose: hide controlled access headings -->
+        <!-- BEGIN BC EDIT -  hide controlled access headings. -->
         <!--
         <fo:block margin-top="8pt">
             <xsl:apply-templates select="/ead:ead/ead:eadheader/ead:profiledesc"/>
@@ -254,7 +256,7 @@
             <xsl:apply-templates select="/ead:ead/ead:eadheader/ead:filedesc/ead:editionstmt"/>
         </fo:block>
         -->
-        <!-- BC end customization -->
+        <!-- END BC EDIT -->
     </xsl:template>
     <xsl:template match="ead:publicationstmt" mode="coverPage">
         <fo:block margin="0 1in">
@@ -284,10 +286,9 @@
     -->
     <xsl:template name="icon">
       <fo:block-container max-width="6.5in" max-height="4in">
-        <!-- BC begin customization -->
-        <!-- purpose: center logo image on title page -->
+        <!-- BEGIN BC EDIT - center logo image on title page. -->
         <fo:block text-align="center">
-        <!-- BC end customization -->
+        <!-- END BC EDIT -->
             <fo:external-graphic content-width="scale-down-to-fit"
               content-height="scale-down-to-fit" width="100%" height="100%"
               scaling="uniform">
@@ -346,8 +347,7 @@
                 </fo:bookmark>
             </xsl:if>
 
-            <!-- BC begin customization -->
-            <!-- purpose: hide controlled access headings -->
+            <!-- BEGIN BC EDIT - hide controlled access headings. -->
             <!--
             <xsl:if test="ead:controlaccess">
                 <fo:bookmark internal-destination="{local:buildID(ead:controlaccess[1])}">
@@ -355,7 +355,7 @@
                 </fo:bookmark>
             </xsl:if>
             -->
-            <!-- BC end customization -->
+            <!-- END BC EDIT -->
             <xsl:if test="ead:otherfindaid">
                 <fo:bookmark internal-destination="{local:buildID(ead:otherfindaid[1])}">
                     <fo:bookmark-title><xsl:value-of select="local:tagName(ead:otherfindaid[1])"/></fo:bookmark-title>
@@ -499,8 +499,7 @@
                     </fo:block>
                 </xsl:if>
 
-                <!-- BC begin customization -->
-                <!-- purpose: hide controlled access headings -->
+                <!-- BEGIN BC EDIT - hide controlled access headings. -->
                 <!--
                 <xsl:if test="ead:controlaccess">
                     <fo:block text-align-last="justify">
@@ -512,7 +511,7 @@
                     </fo:block>
                 </xsl:if>
                 -->
-                <!-- BC end customization -->
+                <!-- END BC EDIT -->
                 <xsl:if test="ead:otherfindaid">
                     <fo:block text-align-last="justify">
                         <fo:basic-link internal-destination="{local:buildID(ead:otherfindaid[1])}"><xsl:value-of select="local:tagName(ead:otherfindaid[1])"/></fo:basic-link>
@@ -647,12 +646,11 @@
                     <xsl:call-template name="toc"/>
                 </fo:block>
             </xsl:if>
-            <!-- BC begin customization -->
-            <!-- purpose: hide controlled access headings -->
+            <!-- BEGIN BC EDIT - hide controlled access headings. -->
             <!--
             <xsl:apply-templates select="ead:controlaccess"/>
             -->
-            <!-- BC end customization -->
+            <!-- END BC EDIT -->
             <xsl:apply-templates select="ead:otherfindaid"/>
             <xsl:apply-templates select="ead:phystech"/>
             <xsl:apply-templates select="ead:odd"/>
