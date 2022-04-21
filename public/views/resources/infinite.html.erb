@@ -29,23 +29,22 @@
   <div class="col-sm-9 col-sm-push-3-xxx">
     <div class="infinite-record-wrapper row">
       <div class="infinite-record-container">
-          <div class="root">
-              <% waypoint_size = 20 %>
-              <% @ordered_records.each_slice(waypoint_size).each_with_index do |refs, i| %>
-                  <div class="waypoint" data-waypoint-number="<%= i %>" data-waypoint-size=<%= waypoint_size %> data-uris="<%= refs.map {|r| r['ref']}.join(';') %>">&nbsp;</div>
-              <% end %>
-          </div>
-       </div>
-     </div>
+        <div class="root">
+          <% waypoint_size = 20 %>
+          <% @ordered_records.each_slice(waypoint_size).each_with_index do |refs, i| %>
+              <div class="waypoint" data-waypoint-number="<%= i %>" data-waypoint-size=<%= waypoint_size %> data-uris="<%= refs.map {|r| r['ref']}.join(';') %>">&nbsp;</div>
+          <% end %>
+        </div>
+      </div>
+    </div>
   </div>
 
   <div id="sidebar" class="sidebar sidebar-container col-sm-3 resizable-sidebar infinite-tree-sidebar">
-  <% if AppConfig[:pui_search_collection_from_collection_organization] %>
-    <%= render partial: 'shared/search_collection_form', :locals => {:resource_uri => @result['uri'], :action_text => t('actions.search_in', :type => t('resource._singular'))} %>
-  <% end %>
-  <div class="infinite-tree-view largetree-container" id='tree-container'></div>
+    <% if AppConfig[:pui_search_collection_from_collection_organization] %>
+      <%= render partial: 'shared/search_collection_form', :locals => {:resource_uri => @result['uri'], :action_text => t('actions.search_in', :type => t('resource._singular'))} %>
+    <% end %>
+    <div class="infinite-tree-view largetree-container" id='tree-container'></div>
   </div>
-</div>
 </div>
 
 <script>
@@ -72,7 +71,6 @@
                           function() {
                               syncer.treeIsReady(tree);
                           },
-                          /*$.noop);*/
                           function(current_node, tree) {
                             tree.expandNode(current_node);
                           });
