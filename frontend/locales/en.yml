@@ -5,9 +5,9 @@ en:
     string_3: IMC Print Indicator (Y/N)
     text_4: File Maker Migration Data
   brand:
-    title: Search Burns Archives DEV
+    title: Search Burns Archives TEST
     home: Home
-    welcome_head: Welcome to Search Burns Archives DEV
+    welcome_head: Welcome to Search Burns Archives TEST
     welcome_message: Welcome to Search Burns Archives
   welcome:
     heading: Welcome to BC Libraries ArchivesSpace
