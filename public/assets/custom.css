@@ -185,7 +185,7 @@ color:#dccaa0;
          border-color: #8a100b;
  }
 
- .record-type-badge.agent {
+ .record-type-badge.agent, .record-type-badge.classification, .record-type-badge.repository, .record-type-badge.subject {
          color: #726158;
          border-color: #726158;
  }
