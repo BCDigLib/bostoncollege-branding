@@ -1,15 +1,15 @@
 <% if defined?(@context) && !@context.blank? %>
 <div class="clear">
-	<h2>Debug breadcrumb</h2>
+    <h2>Debug breadcrumb</h2>
     <%= debug @context %>
 
     <h2>Updated breadcrumbs layout</h2>
     <% if @context && @context.length > 2 %>
-    <nav aria-label="hierarchical navigation">
+    <nav aria-label="hierarchical navigation" class="breadcrumbs-length-<%= @context.length %>">
         <ul class="breadcrumb">
             <% @context.each do |bread| %>
                 <% if bread[:crumb] && bread[:type] && bread[:type] != "repository"; crumb = bread[:crumb]; crumb += " (#{bread[:identifier]})" if bread[:identifier] %>
-                <li>
+                <li class="breadcrumb-type-<%= bread[:type] %>">
                     <%= badge_for_type(bread[:type]) %>
                     <% if bread[:uri].blank? %>
                         <%= process_mixed_content(crumb).html_safe %>
@@ -24,7 +24,7 @@
         </ul>
     </nav>
     <% else %>
-    <nav aria-label="hierarchical navigation">
+    <nav aria-label="hierarchical navigation" class="breadcrumbs-length-<%= @context.length %>">
         <ul class="breadcrumb">
             <li>none</li>
         </ul>
