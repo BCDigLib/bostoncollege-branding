@@ -262,3 +262,8 @@ color:#dccaa0;
 .infinite-item {
   margin-right: 20px;
 }
+
+/* DEBUG testing on search results pages */
+.updated-breadcrumbs .delimiter:first-of-type {display: none;}
+.updated-breadcrumbs .delimiter-0 {display: none;}
+.updated-breadcrumbs .repo_name {display: none;}
