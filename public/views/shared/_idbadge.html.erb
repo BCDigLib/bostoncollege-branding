@@ -1,3 +1,8 @@
+<%#
+  # most recent file version: v3.2.0
+  # https://github.com/archivesspace/archivesspace/blob/v3.2.0/public/app/views/shared/_idbadge.html.erb
+%>
+
 <%
 if result.level
     if result.primary_type =~ /digital_object/
@@ -51,12 +56,14 @@ end
 
 <div class="badge-and-identifier">
   <div class="record-type-badge <%= (result.primary_type.start_with?('agent') ? 'agent' : result.primary_type) %>">
+    <%# BEGIN BC EDIT - remove subject icon %>
     <% if result.primary_type != "subject" %> <i class="<%= icon_for_type(result.primary_type) %>"></i>&#160;<% end %><%= badge_label %> <% if result.container_summary_for_badge %> &mdash; <%= result.container_summary_for_badge %><% end %>
+    <%# END BC EDIT %>
   </div>
   <% comp_id = display_component_id(result, props.fetch(:infinite_item, false)) %>
   <% unless comp_id.blank? %>
     <div class="identifier">
-     <span class="id-label"><%= t('search_sorting.identifier') %>:</span>&#160;<span class="component"><%= comp_id %></span>
+      <span class="id-label"><%= t('search_sorting.identifier') %>:</span>&#160;<span class="component"><%= comp_id %></span>
     </div>
   <% end %>
 </div>
