@@ -56,7 +56,7 @@ end
   <% comp_id = display_component_id(result, props.fetch(:infinite_item, false)) %>
   <% unless comp_id.blank? %>
     <div class="identifier">
-      <span class="component"><%= badge_label %>&#160;<%= comp_id %>:&#160;<%== result.display_string %></span>
+     <span class="id-label"><%= t('search_sorting.identifier') %>:</span>&#160;<span class="component"><%= comp_id %></span>
     </div>
   <% end %>
 </div>
