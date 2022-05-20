@@ -1,0 +1,4 @@
+en:
+  enumerations:
+    _note_types: &note_type_definitions
+      accessrestrict: Restrictions on Access
