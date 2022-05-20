@@ -84,16 +84,24 @@
     <%# END BC EDIT %>
       <div class="result_context">
         <strong><%= t('context') %>: </strong>
+        <%# BEGIN BC EDIT - ignore the repository string %>
+        <!--
         <span  class="repo_name">
           <%= link_to result.resolved_repository.fetch('name'),
                      app_prefix(repository_base_url(
                       "uri" => result.resolved_repository.fetch('uri'),
                       "slug" => result.resolved_repository.fetch('slug') {|s| nil })) %>
         </span>
+        -->
+        <%# END BC EDIT %>
 
         <% if result.respond_to?(:ancestors) && result.ancestors %>
-          <% result.ancestors.each do |ancestor| %>
-            <%= t('context_delimiter') %>
+          <%# BEGIN BC EDIT - ignore the first delimiter %>
+          <% result.ancestors.each_with_index do |ancestor, idx| %>
+            <% if idx > 0 %>
+              <span class="delimiter delimiter-<%= idx %>"><%= t('context_delimiter') %></span>
+            <% end %>
+          <%# END BC EDIT %>
             <span class="ancestor">
             <% identifier = ancestor.has_key?('id_0') ? (0..3).collect { |i| ancestor["id_#{i}"] }.compact.join('-') : nil %>
             <% title = process_mixed_content(ancestor.fetch('title', "[#{ ancestor.fetch('level', 'untitled')}]" )).html_safe %>
