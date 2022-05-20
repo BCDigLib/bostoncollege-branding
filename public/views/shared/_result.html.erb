@@ -79,7 +79,9 @@
       </div>
     <% end %>
 
-    <% if result.resolved_repository %>
+    <%# BEGIN BC EDIT - don't show found-in list for top level records %>
+    <% if result.resolved_repository && result.respond_to?(:ancestors) && result.ancestors %>
+    <%# END BC EDIT %>
       <div class="result_context">
         <strong><%= t('context') %>: </strong>
         <span  class="repo_name">
