@@ -1,12 +1,19 @@
+<%#
+  # most recent file version: v3.2.0
+  # https://github.com/archivesspace/archivesspace/blob/v3.2.0/public/app/views/shared/_record_innards.html.erb
+%>
+
 <!-- Look for '_inherited' and '*_inherited' properties -->
 <% non_folder = %w(summary langmaterial accessrestrict userestrict bioghist) %>
 <% folder = %w(abstract arrangement phystech physloc otherfindaid custodhist acqinfo appraisal accruals originalsloc altformavail extent relatedmaterial separatedmaterial note_bibliography materialspec physdesc inscription physfacet dimensions edition fileplan legalstatus odd note processinfo note_index) %>
 <div class="upper-record-details">
 
-<% unless @result.dates.blank? %>
+    <%# BEGIN BC EDIT - rearrange metadata fields %>
+    <% unless @result.dates.blank? %>
       <h2><%= t('resource._public.dates') %></h2>
       <%= render partial: 'shared/dates', locals: {:dates => @result.dates} %>
     <% end %>
+    <%# END BC EDIT %>
 
     <% over = @result.note('scopecontent') %>
     <% if over.blank?
@@ -17,6 +24,10 @@
     <% unless over.blank? %>
       <%= render partial: 'shared/single_note', locals: {:type => 'abstract', :note_struct => over} %>
     <% end %>
+
+    <%# BEGIN BC EDIT - rearrange metadata fields %>
+    <%# removed @results.date block %>
+    <%# END BC EDIT %>
 
     <% if @result.agents && Array(@result.agents['creator']).length > 0 %>
       <% a_direct_creator = @result.agents['creator'].reject{|r| r['_inherited']}.take(1) %>
