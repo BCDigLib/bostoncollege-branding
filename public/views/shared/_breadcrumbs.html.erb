@@ -1,0 +1,31 @@
+<%#
+  # most recent file version: v3.2.0
+  # https://github.com/archivesspace/archivesspace/blob/v3.2.0/public/app/views/shared/_breadcrumbs.html.erb
+%>
+
+<%# BEGIN BC EDIT - don't show breadcrumbs for top level records %>
+<% if defined?(@context) && !@context.blank? && @context.length > 2 %>
+<%# END BC EDIT %>
+<div class="clear">
+    <nav aria-label="hierarchical navigation">
+      <ul class="breadcrumb">
+	<% @context.each do |bread| %>
+    <%# BEGIN BC EDIT - don't show repository breadcrumb %>
+	<% if bread[:crumb] && bread[:type] && bread[:type] != "repository"; crumb = bread[:crumb]; crumb += " (#{bread[:identifier]})" if bread[:identifier] %>
+    <%# END BC EDIT %>
+	<li>
+	  <%= badge_for_type(bread[:type]) %>
+	  <% if bread[:uri].blank? %>
+	    <%= process_mixed_content(crumb).html_safe %>
+	  <% else %>
+	    <a href='<%=app_prefix(bread[:uri]) %>'>
+		<%= process_mixed_content(crumb).html_safe %>
+	    </a>
+	  <% end %>
+	</li>
+	<% end %>
+	<% end %>
+      </ul>
+    </nav>
+</div>
+<% end %>
