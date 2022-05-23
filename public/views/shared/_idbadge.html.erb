@@ -4,6 +4,14 @@
 %>
 
 <%
+# BEGIN BC EDIT - hide identifier string on file-level records
+if result.level && (result.level == "item" || result.level == "file")
+    smallest_unit_of_record = true
+else
+    smallest_unit_of_record = false
+end
+# END BC EDIT
+
 if result.level
     if result.primary_type =~ /digital_object/
       level = I18n.t("enumerations.digital_object_level.#{result.level}", :default => result.level)
@@ -62,7 +70,7 @@ end
   </div>
   <% comp_id = display_component_id(result, props.fetch(:infinite_item, false)) %>
   <%# BEGIN BC EDIT - hide identifier string on file-level records %>
-  <% unless comp_id.blank? || (result.level && result.level == "file") %>
+  <% unless comp_id.blank? || smallest_unit_of_record %>
   <%# END BC EDIT %>
     <div class="identifier">
       <span class="id-label"><%= t('search_sorting.identifier') %>:</span>&#160;<span class="component"><%= comp_id %></span>
