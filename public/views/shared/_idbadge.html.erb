@@ -61,7 +61,9 @@ end
     <%# END BC EDIT %>
   </div>
   <% comp_id = display_component_id(result, props.fetch(:infinite_item, false)) %>
-  <% unless comp_id.blank? %>
+  <%# BEGIN BC EDIT - hide identifier string on file-level records %>
+  <% unless comp_id.blank? || (result.level && result.level == "file") %>
+  <%# END BC EDIT %>
     <div class="identifier">
       <span class="id-label"><%= t('search_sorting.identifier') %>:</span>&#160;<span class="component"><%= comp_id %></span>
     </div>
