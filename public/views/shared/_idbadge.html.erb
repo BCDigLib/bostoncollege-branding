@@ -4,7 +4,7 @@
 %>
 
 <%
-# BEGIN BC EDIT - hide identifier string on file-level records
+# BEGIN BC EDIT - hide identifier string on file- or item-level records
 if result.level && (result.level == "item" || result.level == "file")
     smallest_unit_of_record = true
 else
@@ -69,7 +69,7 @@ end
     <%# END BC EDIT %>
   </div>
   <% comp_id = display_component_id(result, props.fetch(:infinite_item, false)) %>
-  <%# BEGIN BC EDIT - hide identifier string on file-level records %>
+  <%# BEGIN BC EDIT - hide identifier string on file- or item-level records %>
   <% unless comp_id.blank? || smallest_unit_of_record %>
   <%# END BC EDIT %>
     <div class="identifier">
