@@ -64,8 +64,8 @@ end
 
 <div class="badge-and-identifier">
   <div class="record-type-badge <%= (result.primary_type.start_with?('agent') ? 'agent' : result.primary_type) %>">
-    <%# BEGIN BC EDIT - remove subject icon %>
-    <% if result.primary_type != "subject" %> <i class="<%= icon_for_type(result.primary_type) %>"></i>&#160;<% end %><%= badge_label %> <% if result.container_summary_for_badge %> &mdash; <%= result.container_summary_for_badge %><% end %>
+    <%# BEGIN BC EDIT - dont display icon and badge label for subejct and classifcation records  %>
+    <% if (result.primary_type != "subject") && (result.primary_type != "classification") %> <i class="<%= icon_for_type(result.primary_type) %>"></i>&#160;<%= badge_label %> <% if result.container_summary_for_badge %> &mdash; <%= result.container_summary_for_badge %><% end %><% end %>
     <%# END BC EDIT %>
   </div>
   <% comp_id = display_component_id(result, props.fetch(:infinite_item, false)) %>
