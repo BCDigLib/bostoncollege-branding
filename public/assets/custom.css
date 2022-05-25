@@ -262,3 +262,12 @@ color:#dccaa0;
 .infinite-item {
   margin-right: 20px;
 }
+
+/*Add prefix string to breadcrumbs found on record pages*/
+.breadcrumb>li+li::before {
+    content: none;
+}
+.breadcrumb>li.breadcrumb-item+li.breadcrumb-item::before {
+    color: #00171f;
+    content: '\007C\00a0';
+}
