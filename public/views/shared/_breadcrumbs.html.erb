@@ -9,11 +9,16 @@
 <div class="clear">
     <nav aria-label="hierarchical navigation">
       <ul class="breadcrumb">
+        <%# BEGIN BC EDIT - include prefix string to breadcrumbs %>
+        <li class="breadcrumb-prefix"><%= t('context') %>: </li>
+        <%# END BC EDIT %>
 	<% @context.each do |bread| %>
     <%# BEGIN BC EDIT - don't show repository breadcrumb %>
 	<% if bread[:crumb] && bread[:type] && bread[:type] != "repository"; crumb = bread[:crumb]; crumb += " (#{bread[:identifier]})" if bread[:identifier] %>
     <%# END BC EDIT %>
-	<li>
+    <%# BEGIN BC EDIT - include prefix string to breadcrumbs %>
+	<li class="breadcrumb-item">
+    <%# END BC EDIT %>
 	  <%= badge_for_type(bread[:type]) %>
 	  <% if bread[:uri].blank? %>
 	    <%= process_mixed_content(crumb).html_safe %>
