@@ -73,7 +73,9 @@ end
   <% unless comp_id.blank? || smallest_unit_of_record %>
   <%# END BC EDIT %>
     <div class="identifier">
-      <span class="id-label"><%= t('search_sorting.identifier') %>:</span>&#160;<span class="component"><%= comp_id %></span>
+      <%# BEGIN BC EDIT - update identifier string %>
+      <span class="component"><%= badge_label %>&#160;<%= comp_id %>:&#160;<%== result.display_string %></span>
+      <%# END BC EDIT %>
     </div>
   <% end %>
 </div>
