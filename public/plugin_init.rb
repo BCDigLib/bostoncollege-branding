@@ -8,6 +8,6 @@ Rails.application.config.after_initialize do
 
   class SearchController < ApplicationController
     # remove "Subjects" facet from "Additional filters" list
-    DEFAULT_SEARCH_FACET_TYPES = ['repository', 'primary_type', 'published_agents', 'langcode']
+    DEFAULT_SEARCH_FACET_TYPES = ['primary_type', 'published_agents', 'langcode']
   end
 end
