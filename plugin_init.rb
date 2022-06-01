@@ -3,6 +3,7 @@ AppConfig[:enable_public] = true
 AppConfig[:pui_hide][:repositories] = true
 AppConfig[:pui_hide][:accessions] = true
 AppConfig[:pui_hide][:subjects] = true
+AppConfig[:pui_hide][:classifications] = true
 AppConfig[:pui_hide][:container_inventory] = true
 AppConfig[:pui_page_actions_request] = false
 AppConfig[:plugins] << 'request_list' << 'harvard_aeon'
