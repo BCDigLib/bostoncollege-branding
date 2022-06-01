@@ -6,7 +6,6 @@ AppConfig[:pui_hide][:subjects] = true
 AppConfig[:pui_hide][:classifications] = true
 AppConfig[:pui_hide][:container_inventory] = true
 AppConfig[:pui_page_actions_request] = false
-AppConfig[:plugins] << 'request_list' << 'harvard_aeon'
 AppConfig[:request_list] = {
   :button_position => 0,
   :record_types => ['archival_object', 'resource', 'top_container'],
