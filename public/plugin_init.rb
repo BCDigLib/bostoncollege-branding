@@ -62,5 +62,8 @@ Rails.application.config.after_initialize do
   class SearchController < ApplicationController
     # remove "subjects" and "repository" facets from "Additional filters" list
     DEFAULT_SEARCH_FACET_TYPES = ['primary_type', 'published_agents', 'langcode']
+
+    # remove "subject" from list of record types to search
+    DEFAULT_TYPES = %w{archival_object digital_object digital_object_component agent resource repository accession classification}
   end
 end
