@@ -4,7 +4,7 @@
 %>
 
 <%
-# BEGIN BC EDIT - hide identifier string on file- or item-level records
+# BEGIN BC EDIT - simple test to determine if this record is the smallest unit of record
 if result.level && (result.level == "item" || result.level == "file")
     smallest_unit_of_record = true
 else
@@ -23,6 +23,32 @@ if result.level
 else
     badge_label = t("#{result.primary_type}._singular")
 end
+
+# BEGIN BC EDIT - compute identifier string
+
+# the "props" array should have a "full" key that contains a boolean value if this record is a full record display. 
+is_full_record = props.fetch(:full,false)
+
+if !is_full_record
+  # ignore the identifier string if this isn't a full-record display
+  id_string = ""
+else
+  comp_id = display_component_id(result, props.fetch(:infinite_item, false))
+
+  if comp_id.blank? || smallest_unit_of_record
+    # ignore the identifier string for records that lack a component ID string,
+    # or is the smallest unit of record
+    id_string = ""
+  elsif result.primary_type && result.primary_type =~ /digital_object/
+    # swap around the component ID and display string when the primary type is digital_object  
+    id_string = "#{badge_label} #{result.display_string}: #{comp_id}"
+  else
+    # use the default identifier string format
+    id_string = "#{badge_label} #{comp_id}: #{result.display_string}"
+  end
+end
+# END BC EDIT
+
 %>
 
 <%# build URL with slugs depending on the primary type %>
@@ -66,18 +92,9 @@ end
   <div class="record-type-badge <%= (result.primary_type.start_with?('agent') ? 'agent' : result.primary_type) %>">
     <i class="<%= icon_for_type(result.primary_type) %>"></i>&#160;<%= badge_label %> <% if result.container_summary_for_badge %> &mdash; <%= result.container_summary_for_badge %><% end %>
   </div>
-  <%# BEGIN BC EDIT - only display component badge string on full-record page %>
-  <% if props.fetch(:full,false) %>
-    <% comp_id = display_component_id(result, props.fetch(:infinite_item, false)) %>
-    <%# BEGIN BC EDIT - hide identifier string on file- or item-level records %>
-    <% unless comp_id.blank? || smallest_unit_of_record %>
-    <%# END BC EDIT %>
-        <div class="identifier">
-        <%# BEGIN BC EDIT - update identifier string %>
-        <span class="component"><%= badge_label %>&#160;<%= comp_id %>:&#160;<%== result.display_string %></span>
-        <%# END BC EDIT %>
-        </div>
-    <% end %>
-  <% end %>
+  <%# BEGIN BC EDIT - display computed identifier string. Note: this may be an empty string %>
+  <div class="identifier">
+    <span class="component"><%= id_string %></span>
+  </div>
   <%# END BC EDIT %>
 </div>
