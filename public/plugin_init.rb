@@ -66,4 +66,23 @@ Rails.application.config.after_initialize do
     # remove "subject" from list of record types to search
     DEFAULT_TYPES = %w{archival_object digital_object digital_object_component agent resource repository accession classification}
   end
+
+  # most recent file version: v3.2.0
+  # https://github.com/archivesspace/archivesspace/blob/v3.2.0/public/app/controllers/resources_controller.rb
+  class ResourcesController < ApplicationController
+    DEFAULT_RES_FACET_TYPES = %w{primary_type published_agents langcode}
+  end
+  
+  # most recent file version: v3.2.0
+  # https://github.com/archivesspace/archivesspace/blob/v3.2.0/public/app/controllers/agents_controller.rb
+  class AgentsController < ApplicationController
+    DEFAULT_AG_FACET_TYPES = %w{primary_type}
+  end
+  
+  # most recent file version: v3.2.0
+  # https://github.com/archivesspace/archivesspace/blob/v3.2.0/public/app/controllers/objects_controller.rb
+  class ObjectsController < ApplicationController
+    DEFAULT_OBJ_FACET_TYPES = %w(repository primary_type published_agents langcode)
+  end
+
 end
