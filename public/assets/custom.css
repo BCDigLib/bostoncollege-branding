@@ -62,6 +62,7 @@ h6 {
     font-family: 'Open Sans', Arial, sans-serif;
     font-size: 20px;
     font-weight: 200;
+    margin: .25rem 0;
 }
 
 /*Set header color to Library black, reduce height and remove blue lower border*/
