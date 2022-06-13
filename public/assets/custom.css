@@ -55,6 +55,13 @@ h6 {
     color: #2f7ab9; /* BC link color */
 }
 
+/* Style skip-nav */
+.skipnav .sr-only {
+    background-color: #fff;
+    padding: .25rem;
+    z-index: 100;
+}
+
 
 /*Style for Burns header - can't use regaular h color on modified header row*/
 .header-title, .header-title a {
