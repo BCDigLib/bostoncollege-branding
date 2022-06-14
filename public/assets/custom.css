@@ -55,6 +55,11 @@ h6 {
     color: #2f7ab9; /* BC link color */
 }
 
+/*Make sure we have good contrast for inifinite tree view links*/
+.infinite-tree-view a.record-title {
+    color: #2C71AA;
+}
+
 /* Style skip-nav */
 .skipnav .sr-only {
     background-color: #fff;
