@@ -189,8 +189,8 @@ color:#dccaa0;
 /*Make record type colors bc and accessible*/
 
  .record-type-badge.resource, .record-type-top_container {
-	 color: #b29d6c;
-	 border-color: #b29d6c;
+	 color: #8a6b46;
+	 border-color: #8a6b46;
  }
 
  .record-type-badge.digital_object, .record-type-badge.accession, .record-type-badge.archival_object {
