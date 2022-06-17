@@ -55,6 +55,18 @@ h6 {
     color: #2f7ab9; /* BC link color */
 }
 
+/*Make sure we have good contrast for inifinite tree view links*/
+.infinite-tree-view a.record-title {
+    color: #2C71AA;
+}
+
+/* Style skip-nav */
+.skipnav .sr-only {
+    background-color: #fff;
+    padding: .25rem;
+    z-index: 100;
+}
+
 
 /*Style for Burns header - can't use regaular h color on modified header row*/
 .header-title, .header-title a {
@@ -62,6 +74,7 @@ h6 {
     font-family: 'Open Sans', Arial, sans-serif;
     font-size: 20px;
     font-weight: 200;
+    margin: .25rem 0;
 }
 
 /*Set header color to Library black, reduce height and remove blue lower border*/
@@ -176,8 +189,8 @@ color:#dccaa0;
 /*Make record type colors bc and accessible*/
 
  .record-type-badge.resource, .record-type-top_container {
-	 color: #b29d6c;
-	 border-color: #b29d6c;
+	 color: #8a6b46;
+	 border-color: #8a6b46;
  }
 
  .record-type-badge.digital_object, .record-type-badge.accession, .record-type-badge.archival_object {

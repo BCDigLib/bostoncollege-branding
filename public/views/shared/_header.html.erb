@@ -10,7 +10,8 @@
 <section  id="header">
   <div class="row">
     <div class="col-sm-9">
-      <span class="header-title">
+      <%# BEGIN BC EDIT - Add H1 tag to core application template. %>
+      <h1 class="header-title">
         <% unless request.original_fullpath == '/' %>
           <a title="<%=t('brand.title_link_text') %>" href="<%= AppConfig[:public_proxy_url] %>">
         <% end %>
@@ -18,7 +19,8 @@
         <% unless request.original_fullpath == '/' %>
           </a>
         <% end %>
-      </span>
+      </h1>
+      <%# END BC EDIT %>
     </div>
   </div>
 </section>
