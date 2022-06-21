@@ -1,4 +1,6 @@
 # These are the custom config overrides for this local instance of archivesspace
+
+AppConfig[:feedback_url] = "mailto:archival-discovery-feedback-ggroup@bc.edu"
 AppConfig[:enable_public] = true
 AppConfig[:pui_hide][:repositories] = true
 AppConfig[:pui_hide][:accessions] = true
