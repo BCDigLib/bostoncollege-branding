@@ -6,7 +6,9 @@
 <div class="row">
   <div class="col-sm-12">
     <h2><%= t('brand.welcome_head') %></h2>
-      <div> <%= t('brand.welcome_message').html_safe %> </div>
+      <%# BEGIN BC EDIT - move welcome message below search form %>
+      <div> <%#= t('brand.welcome_message').html_safe %> </div>
+      <%# END BC EDIT %>
   </div>
 </div>
 
@@ -29,3 +31,11 @@
            ]
     } %>
     <%# END BC EDIT %>
+
+<%# BEGIN BC EDIT - move welcome message below search form %>
+<div class="row">
+  <div class="col-sm-12">
+      <div> <%= t('brand.welcome_message').html_safe %> </div>
+  </div>
+</div>
+<%# END BC EDIT %>

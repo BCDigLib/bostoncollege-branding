@@ -284,3 +284,8 @@ color:#dccaa0;
     color: #00171f;
     content: '\007C\00a0';
 }
+
+/*Welcome page */
+form#advanced_search {
+    padding-bottom: 2rem;
+}
