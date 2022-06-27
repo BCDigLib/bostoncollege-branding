@@ -289,3 +289,8 @@ color:#dccaa0;
 form#advanced_search {
     padding-bottom: 2rem;
 }
+
+/*Header height adjustment to avoid text clipping on mobile */
+#header > .row {
+    height: auto;
+}
