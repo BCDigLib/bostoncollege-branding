@@ -5,9 +5,9 @@ en:
     string_3: IMC Print Indicator (Y/N)
     text_4: File Maker Migration Data
   brand:
-    title: Search Burns Library Archival Collections (DEV)
+    title: Search Burns Archives (Beta)
     home: Home
-    welcome_head: Welcome to Search Burns Archives (DEV)
+    welcome_head: Welcome to Search Burns Archives (Beta)
     welcome_message: |
         <h3>About Burns Library archival collections</h3>
         <p>Our archival <a href="https://libguides.bc.edu/burns/collections/overview" target="_blank">collections</a> include those documenting individuals and organizations pertaining to Irish and Irish Americans, British Catholic authors, the practice of Catholicism in the United States, nursing and nursing education, Boston, and Boston College.</p>
