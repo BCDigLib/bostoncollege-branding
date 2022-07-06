@@ -21,3 +21,6 @@ en:
     heading: Welcome to BC Libraries ArchivesSpace
     message: For use by authorized staff.
     message_logged_in: You are now logged in to the staff interface.
+  archival_object:
+    _singular: Series/Subseries/File
+    _plural: Series/Subseries/Files
