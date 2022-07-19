@@ -9,6 +9,8 @@ AppConfig[:pui_hide][:classifications] = true
 AppConfig[:pui_hide][:container_inventory] = true
 AppConfig[:pui_page_actions_request] = false
 
+# Include custom routes.rb file
+Plugins::extend_aspace_routes(File.join(File.dirname(__FILE__), "routes.rb"))
 
 ## OVERRIDE VARIOUS METHODS/ ADD NEW METHODS
 Rails.application.config.after_initialize do
