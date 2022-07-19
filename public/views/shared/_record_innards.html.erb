@@ -85,11 +85,11 @@
           <% x = render partial: 'shared/present_list', locals: {:list =>  @result.deaccessions.collect{|d| d.fetch('description')}, :list_clss => 'deaccessions'} %>
           <%= render partial: 'shared/accordion_panel', locals: {:p_title => t('deaccessions'), :p_id => 'deaccessions_list', :p_body => x} %>
         <% end %>
-        <% unless @result.subjects.blank? %>
-	   <% x= render partial: 'shared/present_list', locals: {:list => @result.subjects, :list_clss => 'subjects_list'} %>
-	   <%= render partial: 'shared/accordion_panel', locals: {:p_title =>  t('subject._plural'),
+        <%# unless @result.subjects.blank? %>
+	   <%# x= render partial: 'shared/present_list', locals: {:list => @result.subjects, :list_clss => 'subjects_list'} %>
+	   <%#= render partial: 'shared/accordion_panel', locals: {:p_title =>  t('subject._plural'),
 	      :p_id => 'subj_list', :p_body => x} %>
-	<% end %>
+	<%# end %>
   <% unless @result.classifications.blank? %>
     <% x= render partial: 'classifications/related_listing', locals: {:classifications => @result.classifications} %>
     <%= render partial: 'shared/accordion_panel', locals: {:p_title =>  t('classification._plural'),
