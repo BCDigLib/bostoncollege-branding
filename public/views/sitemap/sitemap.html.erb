@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>@ASPACE_PUBLIC_URL</loc>
+  </url>
+  <% @sitemap_agents.each do |agent| %>
+    <url>
+      <loc>@http://localhost:8081<%= agent %></loc>
+    </url>
+  <% end %>
+</urlset>
