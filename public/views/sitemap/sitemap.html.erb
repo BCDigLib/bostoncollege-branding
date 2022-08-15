@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>@ASPACE_PUBLIC_URL</loc>
-  </url>
   <% @sitemap_agents.each do |agent| %>
-    <url>
-      <loc>@http://localhost:8081<%= agent %></loc>
-    </url>
+    <div>
+      <loc>http://localhost:8081<%= agent %></loc>
+    </div>
+  <% end %>
+  <% @sitemap_resources.each do |resource| %>
+    <div class="row"><div class="col-sm-9">
+      http://localhost:8081<%= resource %>
+    </div></div>
+  <% end %>
+  <% @sitemap_digitalobjects.each do |digital_object| %>
+    <div class="row"><div class="col-sm-9">
+      http://localhost:8081<%= digital_object %>
+    </div></div>
   <% end %>
 </urlset>
