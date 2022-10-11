@@ -1,7 +1,7 @@
 # encoding: utf-8
 
-# most recent file version: v3.2.0
-# https://github.com/archivesspace/archivesspace/blob/v3.2.0/backend/app/exporters/serializers/ead.rb
+# most recent file version: v3.3.1
+# https://github.com/archivesspace/archivesspace/blob/v3.3.1/backend/app/exporters/serializers/ead.rb
 
 # BC local edits:
 #  see method serialize_languages()
@@ -406,7 +406,7 @@ class EADSerializer < ASpaceExport::Serializer
   end
 
   def serialize_controlaccess(data, xml, fragments)
-    if (data.controlaccess_subjects.length + data.controlaccess_linked_agents.length) > 0
+    if (data.controlaccess_subjects.length + data.controlaccess_linked_agents(@include_unpublished).length) > 0
       xml.controlaccess {
         data.controlaccess_subjects.each do |node_data|
           xml.send(node_data[:node_name], node_data[:atts]) {
@@ -414,7 +414,7 @@ class EADSerializer < ASpaceExport::Serializer
           }
         end
 
-        data.controlaccess_linked_agents.each do |node_data|
+        data.controlaccess_linked_agents(@include_unpublished).each do |node_data|
           xml.send(node_data[:node_name], node_data[:atts]) {
             sanitize_mixed_content( node_data[:content], xml, fragments, ASpaceExport::Utils.include_p?(node_data[:node_name]) )
           }
@@ -487,7 +487,7 @@ class EADSerializer < ASpaceExport::Serializer
     atts[:id] = prefix_id(SecureRandom.hex)
     last_id = atts[:id]
 
-    atts[:type] = top['type']
+    atts[:type] = top['type'] unless (top['type'].nil? || top['type'].empty?)
     text = top['indicator']
 
     atts[:label] = I18n.t("enumerations.instance_instance_type.#{inst['instance_type']}",
@@ -583,20 +583,20 @@ class EADSerializer < ASpaceExport::Serializer
       xml.daogrp( atts ) {
         xml.daodesc { sanitize_mixed_content(content, xml, fragments, true) } if content
         file_versions_to_display.each do |file_version|
-          # BEGIN BC EDIT
-          # check for file_version objects that have a handle string as the file_uri value
-          # ignore thumbnail image URIs
-          if file_version['file_uri'].start_with?('http://hdl.handle.net')
-            atts = {}
-            atts['xlink:type'] = 'locator'
-            atts['xlink:href'] = file_version['file_uri']
-            atts['xlink:role'] = file_version['use_statement'] if file_version['use_statement']
-            atts['xlink:title'] = file_version['caption'] if file_version['caption']
-            atts['audience'] = 'internal' unless is_digital_object_published?(digital_object, file_version)
-            xml.daoloc(atts)
+            # BEGIN BC EDIT
+            # check for file_version objects that have a handle string as the file_uri value
+            # ignore thumbnail image URIs
+            if file_version['file_uri'].start_with?('http://hdl.handle.net')
+              atts = {}
+              atts['xlink:type'] = 'locator'
+              atts['xlink:href'] = file_version['file_uri']
+              atts['xlink:role'] = file_version['use_statement'] if file_version['use_statement']
+              atts['xlink:title'] = file_version['caption'] if file_version['caption']
+              atts['audience'] = 'internal' unless is_digital_object_published?(digital_object, file_version)
+              xml.daoloc(atts)
+            end
+            # END BC EDIT
           end
-          # END BC EDIT
-        end
       }
     end
   end
