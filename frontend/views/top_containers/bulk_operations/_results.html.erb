@@ -1,6 +1,6 @@
 <%#
-  # most recent file version: v3.2.0
-  # https://github.com/archivesspace/archivesspace/blob/v3.2.0/frontend/app/views/top_containers/bulk_operations/_results.html.erb
+  # most recent file version: v3.3.1
+  # https://github.com/archivesspace/archivesspace/blob/v3.3.1/frontend/app/views/top_containers/bulk_operations/_results.html.erb
 %>
 
 <% can_edit = user_can?("update_container_record") %>
@@ -60,7 +60,7 @@
           <% if doc['collection_identifier_stored_u_sstr'] %>
             <ul class="linked-records-listing count-<%= Array(doc['collection_identifier_stored_u_sstr']).length %>">
               <% Array(doc['collection_identifier_stored_u_sstr']).zip(Array(doc['collection_display_string_u_sstr'])).each do |identifier, display| %>
-                <li><span class="collection-identifier"><%= identifier %></span>, <span class="collection-display-string"><%= display %></span</li>
+                <li><span class="collection-identifier"><%= identifier %></span>, <span class="collection-display-string"><%= display %></span></li>
               <% end %>
             </ul>
           <% end %>
@@ -76,14 +76,14 @@
         </td>
         <td class="top-container-profile"><%= Array(doc['container_profile_display_string_u_sstr']).first %></td>
         <td class="top-container-type"><%= container_json['type'] %></td>
-        <td class="top-container-indicator">
-          <%# BEGIN BC EDIT - Check if the accession was migrated. %>
-          <% if container_json.dig("collection", 0, "ref") && container_json.dig("collection", 0, "ref").include?("accessions") && Date.parse(container_json["create_time"]) < Date.parse('2017-06-04') %>
-            <%= container_json.dig("container_locations", 0, "note")  %>
-          <% else %>
-            <%= container_json['indicator'] %>
-          <% end %>
-          <%# END BC EDIT %>
+        <td class="top-container-indicator"><%= container_json['indicator'] %></td>
+          <%# BEGIN BC EDIT - Check if the accession was migrated. %>	
+          <% if container_json.dig("collection", 0, "ref") && container_json.dig("collection", 0, "ref").include?("accessions") && Date.parse(container_json["create_time"]) < Date.parse('2017-06-04') %>	
+            <%= container_json.dig("container_locations", 0, "note")  %>	
+          <% else %>	
+            <%= container_json['indicator'] %>	
+          <% end %>	
+          <%# END BC EDIT %>	
         </td>
         <td class="top-container-barcode"><%= container_json['barcode'] %></td>
         <td class="top-container-current-location">
