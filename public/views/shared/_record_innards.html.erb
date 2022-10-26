@@ -1,6 +1,6 @@
 <%#
-  # most recent file version: v3.2.0
-  # https://github.com/archivesspace/archivesspace/blob/v3.2.0/public/app/views/shared/_record_innards.html.erb
+  # most recent file version: v3.3.1
+  # https://github.com/archivesspace/archivesspace/blob/v3.3.1/public/app/views/shared/_record_innards.html.erb
 %>
 
 <!-- Look for '_inherited' and '*_inherited' properties -->
@@ -8,13 +8,12 @@
 <% folder = %w(abstract arrangement phystech physloc otherfindaid custodhist acqinfo appraisal accruals originalsloc altformavail extent relatedmaterial separatedmaterial note_bibliography materialspec physdesc inscription physfacet dimensions edition fileplan legalstatus odd note processinfo note_index) %>
 <div class="upper-record-details">
 
-    <%# BEGIN BC EDIT - rearrange metadata fields %>
-    <% unless @result.dates.blank? %>
-      <h2><%= t('resource._public.dates') %></h2>
-      <%= render partial: 'shared/dates', locals: {:dates => @result.dates} %>
-    <% end %>
+    <%# BEGIN BC EDIT - rearrange metadata fields %>	
+    <% unless @result.dates.blank? %>	
+      <h2><%= t('resource._public.dates') %></h2>	
+      <%= render partial: 'shared/dates', locals: {:dates => @result.dates} %>	
+    <% end %>	
     <%# END BC EDIT %>
-
     <% over = @result.note('scopecontent') %>
     <% if over.blank?
        over = @result.note('abstract')
@@ -25,15 +24,12 @@
       <%= render partial: 'shared/single_note', locals: {:type => 'abstract', :note_struct => over} %>
     <% end %>
 
-    <%# BEGIN BC EDIT - rearrange metadata fields %>
-    <%# removed @results.date block %>
+    <%# BEGIN BC EDIT - rearrange metadata fields %>	
+    <%# removed @results.date block %>	
     <%# END BC EDIT %>
 
     <% if @result.agents && Array(@result.agents['creator']).length > 0 %>
-      <% a_direct_creator = @result.agents['creator'].reject{|r| r['_inherited']}.take(1) %>
-      <% unless a_direct_creator.empty? %>
-        <%= render partial: 'shared/agents_list', locals: {:list => {'creator' => a_direct_creator}, :heading_size => 'h2'} %>
-      <% end %>
+      <%= render partial: 'shared/agents_list', locals: {:list => {'creator' => @result.agents['creator']}, :heading_size => 'h2'} %>
     <% end %>
 
     <% non_folder.each do |type| %>
@@ -85,18 +81,20 @@
           <% x = render partial: 'shared/present_list', locals: {:list =>  @result.deaccessions.collect{|d| d.fetch('description')}, :list_clss => 'deaccessions'} %>
           <%= render partial: 'shared/accordion_panel', locals: {:p_title => t('deaccessions'), :p_id => 'deaccessions_list', :p_body => x} %>
         <% end %>
-        <%# unless @result.subjects.blank? %>
-	   <%# x= render partial: 'shared/present_list', locals: {:list => @result.subjects, :list_clss => 'subjects_list'} %>
-	   <%#= render partial: 'shared/accordion_panel', locals: {:p_title =>  t('subject._plural'),
+        <% unless @result.subjects.blank? %>
+	   <% x= render partial: 'shared/present_list', locals: {:list => @result.subjects, :list_clss => 'subjects_list'} %>
+	   <%= render partial: 'shared/accordion_panel', locals: {:p_title =>  t('subject._plural'),
 	      :p_id => 'subj_list', :p_body => x} %>
-	<%# end %>
+	<% end %>
   <% unless @result.classifications.blank? %>
     <% x= render partial: 'classifications/related_listing', locals: {:classifications => @result.classifications} %>
     <%= render partial: 'shared/accordion_panel', locals: {:p_title =>  t('classification._plural'),
                                                            :p_id => 'classifications_list', :p_body => x} %>
   <% end %>
 	<% unless @result.agents.blank? %>
-	  <% x= render partial: 'shared/agents_list', locals: {:list => @result.agents} %>
+  <%# ANW-1095: don't show creators in related names section since it is redundant %>
+  <% not_creators = @result.agents.except("creator") %>
+	  <% x= render partial: 'shared/agents_list', locals: {:list => not_creators} %>
 	   <%= render partial: 'shared/accordion_panel', locals: {:p_title =>  t('pui_agent.related'),
 	     :p_id => 'agent_list', :p_body => x} %>
         <% end %>
@@ -144,5 +142,5 @@
         <%= render :file => template if File.exists?(template) %>
       <% end %>
     </div>
-    <script type="text/javascript" >initialize_accordion(".note_panel", "<%= t('accordion.expand') %>" , "<%= t('accordion.collapse') %>");
+    <script type="text/javascript" >initialize_accordion(".note_panel", "<%= t('accordion.expand') %>" , "<%= t('accordion.collapse') %>", <%= AppConfig[:pui_expand_all] %>);
     </script>
