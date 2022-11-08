@@ -1,6 +1,6 @@
 # These are the custom config overrides for this local instance of archivesspace
 
-AppConfig[:feedback_url] = "mailto:archival-discovery-feedback-ggroup@bc.edu"
+AppConfig[:feedback_url] = "https://libguides.bc.edu/burns/contact"
 AppConfig[:pui_search_results_page_size] = 25
 AppConfig[:enable_public] = true
 AppConfig[:pui_hide][:repositories] = true
