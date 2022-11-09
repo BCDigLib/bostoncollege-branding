@@ -1,17 +1,21 @@
 # These are the custom config overrides for this local instance of archivesspace
 
-AppConfig[:feedback_url] = "mailto:archival-discovery-feedback-ggroup@bc.edu"
+AppConfig[:feedback_url] = "https://libguides.bc.edu/burns/contact"
 AppConfig[:pui_search_results_page_size] = 25
 AppConfig[:enable_public] = true
 AppConfig[:pui_hide][:repositories] = true
 AppConfig[:pui_hide][:accessions] = true
 AppConfig[:pui_hide][:subjects] = true
+AppConfig[:pui_hide][:digital_objects] = true
 AppConfig[:pui_hide][:classifications] = true
 AppConfig[:pui_hide][:container_inventory] = true
 AppConfig[:pui_page_actions_request] = false
 
 # Include custom routes.rb file
 Plugins::extend_aspace_routes(File.join(File.dirname(__FILE__), "routes.rb"))
+
+# Add FAQ link to main nav
+Plugins::add_menu_item('/faq', 'plugin.bostoncollege-branding.faq_menu_label')
 
 ## OVERRIDE VARIOUS METHODS/ ADD NEW METHODS
 Rails.application.config.after_initialize do
