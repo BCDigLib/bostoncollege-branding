@@ -24,3 +24,6 @@ en:
   archival_object:
     _singular: Series/Subseries/File
     _plural: Series/Subseries/Files
+  plugin:
+    bostoncollege-branding:
+      faq_menu_label: FAQ

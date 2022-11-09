@@ -13,6 +13,9 @@ AppConfig[:pui_page_actions_request] = false
 # Include custom routes.rb file
 Plugins::extend_aspace_routes(File.join(File.dirname(__FILE__), "routes.rb"))
 
+# Add FAQ link to main nav
+Plugins::add_menu_item('/faq', 'plugin.bostoncollege-branding.faq_menu_label')
+
 ## OVERRIDE VARIOUS METHODS/ ADD NEW METHODS
 Rails.application.config.after_initialize do
   # most recent file version: v3.2.0
