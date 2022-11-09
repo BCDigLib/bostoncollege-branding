@@ -94,7 +94,7 @@ end
   </div>
   <%# BEGIN BC EDIT - display computed identifier string. Note: this may be an empty string %>
   <div class="identifier">
-    <span class="component"><%= id_string %></span>
+    <span class="component"><%= id_string.html_safe %></span>
   </div>
   <%# END BC EDIT %>
 </div>
