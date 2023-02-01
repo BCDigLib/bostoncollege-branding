@@ -36,6 +36,9 @@ en:
       three_dimensional_object: three dimensional object
     event_event_type:
       published_materials_transfer: Published Materials Transfer
+      snac_record_updated: SNAC record updated
+      digitization_analysis: Digitization analysis
+      preservation: Preservation
     event_outcome:
       partial pass: Warning
       pass: Success
