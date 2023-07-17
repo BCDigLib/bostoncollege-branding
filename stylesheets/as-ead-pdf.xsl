@@ -19,8 +19,8 @@
         *******************************************************************
     -->
     <!-- 
-        # most recent file version: v3.3.1
-        # https://github.com/archivesspace/archivesspace/blob/v3.3.1/stylesheets/as-ead-pdf.xsl
+        # most recent file version: v3.4.0
+        # https://github.com/archivesspace/archivesspace/blob/v3.4.0/stylesheets/as-ead-pdf.xsl
     -->
     <xsl:output method="xml" encoding="utf-8" indent="yes"/>
 

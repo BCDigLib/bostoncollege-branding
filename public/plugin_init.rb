@@ -19,15 +19,15 @@ Plugins::add_menu_item('/faq', 'plugin.bostoncollege-branding.faq_menu_label')
 
 ## OVERRIDE VARIOUS METHODS/ ADD NEW METHODS
 Rails.application.config.after_initialize do
-  # most recent file version: v3.3.1
-  # https://github.com/archivesspace/archivesspace/blob/v3.3.1/public/app/models/record.rb
+  # most recent file version: v3.4.0
+  # https://github.com/archivesspace/archivesspace/blob/v3.4.0/public/app/models/record.rb
   class Record
     # include "accessrestrict" in list of notes to fetch and render on search results page
     ABSTRACT = %w(abstract scopecontent accessrestrict)
   end
 
-  # most recent file version: v3.3.1
-  # https://github.com/archivesspace/archivesspace/blob/v3.3.1/public/app/controllers/search_controller.rb
+  # most recent file version: v3.4.0
+  # https://github.com/archivesspace/archivesspace/blob/v3.4.0/public/app/controllers/search_controller.rb
   class SearchController < ApplicationController
     # remove "subjects" and "repository" facets from "Additional filters" list
     DEFAULT_SEARCH_FACET_TYPES = ['primary_type', 'published_agents', 'langcode']
@@ -36,15 +36,15 @@ Rails.application.config.after_initialize do
     DEFAULT_TYPES = %w{archival_object digital_object digital_object_component agent resource repository accession classification}
   end
 
-  # most recent file version: v3.3.1
-  # https://github.com/archivesspace/archivesspace/blob/v3.3.1/public/app/controllers/resources_controller.rb
+  # most recent file version: v3.4.0
+  # https://github.com/archivesspace/archivesspace/blob/v3.4.0/public/app/controllers/resources_controller.rb
   class ResourcesController < ApplicationController
     # remove "subjects" from list of resource facet types
     DEFAULT_RES_FACET_TYPES = %w{primary_type published_agents langcode}
   end
   
-  # most recent file version: v3.3.1
-  # https://github.com/archivesspace/archivesspace/blob/v3.3.1/public/app/controllers/agents_controller.rb
+  # most recent file version: v3.4.0
+  # https://github.com/archivesspace/archivesspace/blob/v3.4.0/public/app/controllers/agents_controller.rb
   class AgentsController < ApplicationController
     # remove "subjects" from list of agent facet types
     DEFAULT_AG_FACET_TYPES = %w{primary_type}
@@ -99,8 +99,8 @@ Rails.application.config.after_initialize do
 
   end
   
-  # most recent file version: v3.3.1
-  # https://github.com/archivesspace/archivesspace/blob/v3.3.1/public/app/controllers/objects_controller.rb
+  # most recent file version: v3.4.0
+  # https://github.com/archivesspace/archivesspace/blob/v3.4.0/public/app/controllers/objects_controller.rb
   class ObjectsController < ApplicationController
     # remove "subjects" from list of object facet types
     DEFAULT_OBJ_FACET_TYPES = %w(repository primary_type published_agents langcode)
