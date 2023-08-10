@@ -35,6 +35,7 @@
       <th><%= I18n.t("top_container.type") %></th>
       <th><%= I18n.t("top_container.indicator") %></th>
       <th><%= I18n.t("top_container.barcode") %></th>
+      <th><%= I18n.t("top_container.internal_note") %></th>
       <th><%= I18n.t("top_container._frontend.bulk_operations.current_location") %></th>
       <th><%= I18n.t("top_container.ils_holding_id") %></th>
       <th><%= I18n.t("top_container.restricted") %></th>
@@ -76,16 +77,17 @@
         </td>
         <td class="top-container-profile"><%= Array(doc['container_profile_display_string_u_sstr']).first %></td>
         <td class="top-container-type"><%= container_json['type'] %></td>
-        <td class="top-container-indicator"><%= container_json['indicator'] %></td>
-          <%# BEGIN BC EDIT - Check if the accession was migrated. %>	
-          <% if container_json.dig("collection", 0, "ref") && container_json.dig("collection", 0, "ref").include?("accessions") && Date.parse(container_json["create_time"]) < Date.parse('2017-06-04') %>	
-            <%= container_json.dig("container_locations", 0, "note")  %>	
-          <% else %>	
-            <%= container_json['indicator'] %>	
-          <% end %>	
-          <%# END BC EDIT %>	
+        <%# BEGIN BC EDIT - Check if the accession was migrated. %>
+        <td class="top-container-indicator">
+          <% if container_json.dig("collection", 0, "ref") && container_json.dig("collection", 0, "ref").include?("accessions") && Date.parse(container_json["create_time"]) < Date.parse('2017-06-04') %>
+            <%= container_json.dig("container_locations", 0, "note")  %>
+          <% else %>
+            <%= container_json['indicator'] %>
+          <% end %>
         </td>
+        <%# END BC EDIT %>
         <td class="top-container-barcode"><%= container_json['barcode'] %></td>
+        <td class="top-container-internal_note"><%= container_json['internal_note'] %></td>
         <td class="top-container-current-location">
           <% if doc['location_display_string_u_sstr'] %>
             <ul class="linked-records-listing count-<%= Array(doc['location_uri_u_sstr']).length %>">

@@ -5,9 +5,6 @@
 
 <% if record['json']['representative_file_version'].present? %>
 <div class="available-digital-objects">
-<%# BEGIN BC EDIT - add col sizing %>
-<div class="images col-sm-3 col-md-3 col-lg-2">
-<%# END BC EDIT %>
   <div class="objectimage">
     <div class="panel panel-default">
       <%
@@ -37,9 +34,6 @@
 </div>
 <% elsif local_assigns[:dig_objs] && dig_objs.present? %>
 <div class="available-digital-objects">
-<%# BEGIN BC EDIT - add col sizing %>
-<div class="images col-sm-3 col-md-3 col-lg-2">
-<%# END BC EDIT %>
   <% dig_objs.each do |d_file| %>
     <% if !d_file['out'].blank? %>
       <% if d_file['thumb'].blank? %>

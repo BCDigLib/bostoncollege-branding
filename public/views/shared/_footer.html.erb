@@ -7,11 +7,12 @@
   <div class="row">
      <div class="col-md-12">
        <%# BEGIN BC EDIT - remove staff interface link and ASpace link %>
-       <p class="footer-items"><!--a href="<%= AppConfig[:frontend_proxy_url] %>">Staff Interface</a-->
-         <!--| Visit <a href="http://archivesspace.org">ArchivesSpace.org</a> -->
+       <p class="footer-items">
+         <!-- <%= I18n.t("footer.staff_interface", staff_url: AppConfig[:frontend_proxy_url]).html_safe %> -->
+         <!--| <%= I18n.t("footer.archivesspace_home").html_safe %> -->
          <!--| --> <%= ASConstants.VERSION %>
        <%# END BC EDIT %>
-         | <% if AppConfig[:feedback_url] && !AppConfig[:feedback_url].blank? %><a id='aspaceFeedbackLink' href='<%= AppConfig[:feedback_url]%>' target='_blank'>Send Feedback or Report a Problem</a><% end %></p>
+         <% if AppConfig[:feedback_url] && !AppConfig[:feedback_url].blank? %> | <%= I18n.t("footer.feedback", :feedback_url => AppConfig[:feedback_url]).html_safe %><% end %></p>
      </div>
   </div>
 </div>

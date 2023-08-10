@@ -201,6 +201,8 @@ class EADSerializer < ASpaceExport::Serializer
 
             handle_arks(data, xml)
 
+            serialize_aspace_uri(data, xml)
+
             serialize_extents(data, xml, @fragments)
 
             serialize_dates(data, xml, @fragments)
@@ -219,8 +221,10 @@ class EADSerializer < ASpaceExport::Serializer
 
           }# </did>
 
-          data.digital_objects.each do |dob|
-            serialize_digital_object(dob, xml, @fragments)
+          if @include_daos
+            data.instances_with_digital_objects.each do |instance|
+              serialize_digital_object(instance['digital_object']['_resolved'], xml, @fragments)
+            end
           end
 
           serialize_nondid_notes(data, xml, @fragments)
@@ -251,6 +255,10 @@ class EADSerializer < ASpaceExport::Serializer
     Enumerator.new do |y|
       @stream_handler.stream_out(doc, @fragments, y)
     end
+  end
+
+  def serialize_aspace_uri(data, xml)
+    xml.unitid ({ 'type' => 'aspace_uri' }) { xml.text data.uri }
   end
 
   def handle_arks(data, xml)
@@ -320,6 +328,8 @@ class EADSerializer < ASpaceExport::Serializer
         end
 
         handle_arks(data, xml)
+
+        serialize_aspace_uri(data, xml)
 
         if @include_unpublished
           data.external_ids.each do |exid|
@@ -539,7 +549,6 @@ class EADSerializer < ASpaceExport::Serializer
 
     title = digital_object['title']
     date = digital_object['dates'][0] || {}
-
     atts = {}
 
     content = ""
@@ -571,7 +580,11 @@ class EADSerializer < ASpaceExport::Serializer
       atts['xlink:type'] = 'simple'
       atts['xlink:actuate'] = file_version['xlink_actuate_attribute'] || 'onRequest'
       atts['xlink:show'] = file_version['xlink_show_attribute'] || 'new'
-      atts['xlink:role'] = file_version['use_statement'] if file_version['use_statement']
+      atts['xlink:role'] = if file_version['use_statement'] && digital_object['_is_in_representative_instance']
+                             [file_version['use_statement'], 'representative'].join(' ')
+                           elsif file_version['use_statement']
+                             file_version['use_statement']
+                           end
       atts['xlink:href'] = file_version['file_uri']
       atts['audience'] = 'internal' unless is_digital_object_published?(digital_object, file_version)
       xml.dao(atts) {
@@ -580,25 +593,29 @@ class EADSerializer < ASpaceExport::Serializer
     else
       atts['xlink:type'] = 'extended'
       atts['audience'] = 'internal' unless is_digital_object_published?(digital_object)
+      if digital_object['_is_in_representative_instance']
+        atts['xlink:role'] = 'representative'
+      end
       xml.daogrp( atts ) {
         xml.daodesc { sanitize_mixed_content(content, xml, fragments, true) } if content
         file_versions_to_display.each do |file_version|
-            # BEGIN BC EDIT
-            # check for file_version objects that have a handle string as the file_uri value
-            # ignore thumbnail image URIs
-            if file_version['file_uri'].start_with?('http://hdl.handle.net')
-              atts = {}
-              atts['xlink:type'] = 'locator'
-              atts['xlink:href'] = file_version['file_uri']
-              atts['xlink:role'] = file_version['use_statement'] if file_version['use_statement']
-              atts['xlink:title'] = file_version['caption'] if file_version['caption']
-              atts['audience'] = 'internal' unless is_digital_object_published?(digital_object, file_version)
-              xml.daoloc(atts)
-            end
-            # END BC EDIT
+          # BEGIN BC EDIT
+          # check for file_version objects that have a handle string as the file_uri value
+          # ignore thumbnail image URIs
+          if file_version['file_uri'].start_with?('http://hdl.handle.net')
+            atts = {}
+            atts['xlink:type'] = 'locator'
+            atts['xlink:href'] = file_version['file_uri']
+            atts['xlink:role'] = file_version['use_statement'] if file_version['use_statement']
+            atts['xlink:title'] = file_version['caption'] if file_version['caption']
+            atts['audience'] = 'internal' unless is_digital_object_published?(digital_object, file_version)
+            xml.daoloc(atts)
           end
+          # END BC EDIT
+        end
       }
     end
+    EADSerializer.run_serialize_step(digital_object, xml, fragments, :dao)
   end
 
 

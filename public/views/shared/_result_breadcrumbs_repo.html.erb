@@ -1,0 +1,20 @@
+<%#
+  # most recent file version: v3.4.0
+  # https://github.com/archivesspace/archivesspace/blob/v3.4.0/public/app/views/shared/_result_breadcrumbs_repo.html.erb
+%>
+
+<% if !local_assigns[:hide_label] %>
+  <strong><%= t('context') %>: </strong>
+<% end %>
+
+<%# BEGIN BC EDIT - ignore the repository string %>
+<!--
+<span class="repo_name">
+  <%= badge_for_type('repository') %>
+  <%= link_to result.resolved_repository.fetch('name'),
+            app_prefix(repository_base_url(
+              "uri" => result.resolved_repository.fetch('uri'),
+              "slug" => result.resolved_repository.fetch('slug') {|s| nil })) %>
+</span>
+-->
+<%# END BC EDIT %>
