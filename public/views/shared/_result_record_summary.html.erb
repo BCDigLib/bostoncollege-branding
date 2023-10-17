@@ -17,9 +17,6 @@
     if note_struct.blank?
     note_struct = result.note('scopecontent')
     end
-
-    
-
     if !note_struct['note_text'].blank?
   %>
     <div class="abstract single_note">
@@ -53,6 +50,7 @@
         <%= note_struct['note_text'].html_safe %>
       <% end %>
     </div>
+    <% end %>
     <% # END BC EDIT%>
 
   <% unless props.fetch(:no_repo, false) %>
