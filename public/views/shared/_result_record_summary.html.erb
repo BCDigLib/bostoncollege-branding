@@ -34,7 +34,7 @@
     </div>
   <% end %>
   
-  <% # BEGIN BC EDIT - include accessrestrict note for each record on search results page%>
+  <%# BEGIN BC EDIT - include accessrestrict note for each record on search results page %>
      <% note_struct = result.note('accessrestrict')
       if !note_struct['note_text'].blank? %>
       <div class="abstract single_note">
@@ -51,7 +51,7 @@
       <% end %>
     </div>
     <% end %>
-    <% # END BC EDIT%>
+    <%# END BC EDIT %>
 
   <% unless props.fetch(:no_repo, false) %>
     <%
@@ -84,12 +84,14 @@
     <% end %>
   </div>
 
-  <% if result.resolved_repository %>
+  <%# BEGIN BC EDIT - don't display breadcrumbs for resource records %>
+  <% if result.resolved_repository && result['primary_type'] != 'resource' %>
     <%= render partial: 'shared/result_breadcrumbs', locals: {
       :result => result,
       :props => props
     } %>
   <% end %>
+  <%# END BC EDIT %>
 
   <% if !props.fetch(:full,false)  && result['primary_type'] == 'repository' %>
     <div><strong><%= t('number_of', { :type => t('resource._plural') }) %></strong> <%= @counts[result.uri]['resource'] %></div>
