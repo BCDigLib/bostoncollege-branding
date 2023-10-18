@@ -6,7 +6,7 @@ AppConfig[:enable_public] = true
 AppConfig[:pui_hide][:repositories] = true
 AppConfig[:pui_hide][:accessions] = true
 AppConfig[:pui_hide][:subjects] = true
-AppConfig[:pui_hide][:digital_objects] = true
+AppConfig[:pui_hide][:digital_objects] = false
 AppConfig[:pui_hide][:classifications] = true
 AppConfig[:pui_hide][:container_inventory] = true
 AppConfig[:pui_page_actions_request] = false
@@ -42,7 +42,7 @@ Rails.application.config.after_initialize do
     # remove "subjects" from list of resource facet types
     DEFAULT_RES_FACET_TYPES = %w{primary_type published_agents langcode}
   end
-  
+
   # most recent file version: v3.4.0
   # https://github.com/archivesspace/archivesspace/blob/v3.4.0/public/app/controllers/agents_controller.rb
   class AgentsController < ApplicationController
@@ -65,7 +65,7 @@ Rails.application.config.after_initialize do
       # only use original DEFAULT_AG_FACET_TYPES values; don't add "repository" to list of facet types
       # default_facets.push('used_within_published_repository') unless repo_id
       page = Integer(params.fetch(:page, "1"))
-  
+
       begin
         set_up_and_run_search( DEFAULT_AG_TYPES, default_facets, search_opts, params)
       rescue NoResultsError
@@ -75,13 +75,13 @@ Rails.application.config.after_initialize do
         flash[:error] = I18n.t('errors.unexpected_error')
         redirect_back(fallback_location: '/agents') and return
       end
-  
+
       @context = repo_context(repo_id, 'agent')
       if @results['total_hits'] > 1
         @search[:dates_within] = false
         @search[:text_within] = true
       end
-  
+
       @page_title = I18n.t('agent._plural')
       @results_type = @page_title
       all_sorts = Search.get_sort_opts
@@ -98,7 +98,7 @@ Rails.application.config.after_initialize do
 
 
   end
-  
+
   # most recent file version: v3.4.0
   # https://github.com/archivesspace/archivesspace/blob/v3.4.0/public/app/controllers/objects_controller.rb
   class ObjectsController < ApplicationController
