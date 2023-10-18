@@ -65,10 +65,17 @@
           <div class="panel panel-default">
             <a class="thumbnail" href="<%= d_file['out'] %>" target="new" title="<%= t('digital_object._public.link')%>">
               <img src="<%= d_file['thumb'] %>" alt="<%= strip_mixed_content(d_file['caption'] || t('enumerations.instance_instance_type.digital_object')) %>" />
-            </a>
-                  <div class="panel-heading">
-                    <%= (d_file['caption'] || t('enumerations.instance_instance_type.digital_object')).html_safe %>
+            
+            <% #BEGIN BC EDIT - include link to DAO %>
+            <div class="panel-heading">
+              <%= t('digital_object._public.link').html_safe %>
                   </div>
+           
+            </a>
+                 <!--> <div class="panel-heading">
+                    <%= (d_file['caption'] || t('enumerations.instance_instance_type.digital_object')).html_safe %>
+                  </div> -->
+            <% #END BC EDIT %>
           </div>
         </div>
       <% end %>
