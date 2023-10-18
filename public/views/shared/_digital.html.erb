@@ -38,8 +38,9 @@
     <% if !d_file['out'].blank? %>
       <% if d_file['thumb'].blank? %>
         <div class="objectimage">
+          <div class="panel panel-default">
           <a
-            class="external-digital-object__link record-type-badge digital_object"
+            class="btn btn-default external-digital-object__link record-type-badge digital_object"
             href="<%= d_file['out'] %>"
             target="new"
             title="<%= t('digital_object._public.link')%>"
@@ -59,6 +60,7 @@
               </p>
             </div>
           </a>
+          </div>
         </div>
       <% else %>
         <div class="objectimage">
@@ -69,9 +71,8 @@
             <% #BEGIN BC EDIT - include link to DAO %>
             <div class="panel-heading">
               <%= t('digital_object._public.link').html_safe %>
-                  </div>
-           
-            </a>
+            </div>
+           </a>
                  <!--> <div class="panel-heading">
                     <%= (d_file['caption'] || t('enumerations.instance_instance_type.digital_object')).html_safe %>
                   </div> -->
