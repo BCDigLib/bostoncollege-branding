@@ -12,12 +12,11 @@
         img_uri = rfv['file_uri']
         a_uri = rfv['derived_from'] || rfv['link_uri']
 
-        # BEGIN BC EDIT - get file_version URL for image
-        record_file_version_object = {}
+        # BEGIN BC EDIT - pull out file_uri from file_versions list, and use it to make the thumbnail image clickable
         if record['json']['file_versions'].present? && record['json']['representative_file_version'].present?
           record_file_version_object = record['json']['file_versions'].find { |fv| fv['publish'] && fv['file_uri'] != record['json']['representative_file_version']['file_uri'] }
           unless record_file_version_object.nil?
-            # should be a string similar to "http://hdl.handle.net/2345/1111"
+            # replace a_uri with the file_uri string
             a_uri = record_file_version_object['file_uri']
           end
         end
