@@ -7,7 +7,10 @@ en:
   brand:
     title: Search Burns Archives
     home: Home
-    welcome_head: Welcome to Search Burns Archives
+    welcome_head: |
+        <h2>Welcome to Burns Library Finding Aids</h2>
+        <p>Our reference team is happy to assist your research. To get help navigating the finding aids, <a href="https://bc-primo.hosted.exlibrisgroup.com/primo-explore/search?mode=advanced&vid=bclib_new&lang=en_US&sortby=rank&search_scope=lib_BURNS" target="_blank">the Library Catalog,</a> or to request a more in-depth consultation with our reference staff, <a href="https://libguides.bc.edu/burns/contact" target="_blank">please Contact us</a>!</p>
+
     welcome_message: |
         <h3>Welcome to Burns Library Finding Aids</h3>
         <p>Our reference team is happy to assist your research. To get help navigating the finding aids, <a href="https://bc-primo.hosted.exlibrisgroup.com/primo-explore/search?mode=advanced&vid=bclib_new&lang=en_US&sortby=rank&search_scope=lib_BURNS" target="_blank">the Library Catalog,</a> or to request a more in-depth consultation with our reference staff, <a href="https://libguides.bc.edu/burns/contact" target="_blank">please Contact us</a>!</p>
