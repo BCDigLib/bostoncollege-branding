@@ -2,6 +2,15 @@
   # most recent file version: v3.4.0
   # https://github.com/archivesspace/archivesspace/blob/v3.4.0/public/app/views/welcome/show.html.erb
 %>
+<%# BEGIN BC EDIT - Libcal Hours Widget scripts%>
+  <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script> 
+  <script src="https://libcal.bc.edu/js/hours_grid.js?002"></script>
+  <script>
+    $(function(){ 
+    var week507 = new $.LibCalWeeklyGrid( $("#s-lc-whw507"), { iid: 609, lid: 507, systemTime: true }); 
+    });
+  </script> 
+<%# END BC EDIT%>
 
 <div class="row">
   <div class="col-sm-12">
@@ -32,6 +41,10 @@
            ]
     } %>
     <%# END BC EDIT %>
+
+<%# BEGIN BC EDIT - add library hours from libcal API%>
+  <div id="s-lc-whw507"></div> 
+<%#END BC EDIT%>
 
 <%# BEGIN BC EDIT - move welcome message below search form %>
 <div class="row">
