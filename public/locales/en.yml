@@ -9,15 +9,13 @@ en:
     home: Home
     welcome_head: Welcome to Burns Library Finding Aids
     welcome_message: |
-        <h3>About this site</h3>
-        <p>This site allows you to search all descriptions (finding aids) of archival material at Burns Library at one time. We hope this helps you identify more material relevant to your research and find connections between collections that were previously unknown to you. You can also request material either to use at Burns Library or as a digital copy (scan). Please review our <a href="https://libguides.bc.edu/burns/services/reading-room" target="_blank">reading room policies</a> for general information for researchers and <a href="https://libguides.bc.edu/hours" target="_blank">check our hours</a>.</p>
         <h3>Need help?</h3>
         <p>Search the finding aids to locate and request archival materials within our collections. Our Help page may provide more information, as well as the <a href="https://answers.bc.edu/search/?t=0&g=1644&topics=Burns%20Library&adv=1" target="_blank">FAQ</a> page on our website. </p>
         <h3>Potentially Harmful Language and Content</h3>
         <p>Burns Library and the BC Libraries are committed to <a href="https://libguides.bc.edu/edi" target="_blank">diversity, equity, and inclusion</a>. We are aware that descriptions in our Finding Aids (this site) and <a href="https://library.bc.edu/" target="_blank">Library Catalog</a> have been created over time using standards rooted in systems of harm (e.g. colonialism, racism, sexism, homophobia) and utilizing the dated language of individuals and organizations who made the materials themselves. We are also aware that materials in our collections may be objectionable and offensive; we believe it is important to preserve the past so that we can learn from it. We are actively working to improve the language we use, highlight hidden voices, and contextualize materials; however, there is much work to do.</p>
     welcome_blurb: | 
         <p>Our reference team is happy to assist your research. To get help navigating the finding aids, <a href="https://bc-primo.hosted.exlibrisgroup.com/primo-explore/search?mode=advanced&vid=bclib_new&lang=en_US&sortby=rank&search_scope=lib_BURNS" target="_blank">the Library Catalog,</a> or to request a more in-depth consultation with our reference staff, <a href="https://libguides.bc.edu/burns/contact" target="_blank">please Contact us</a>!</p>
-
+    welcome_hours: Hours
   welcome:
     heading: Welcome to BC Libraries ArchivesSpace
     message: For use by authorized staff.
