@@ -3,6 +3,7 @@
   # https://github.com/archivesspace/archivesspace/blob/v3.4.0/public/app/views/welcome/show.html.erb
 %>
 <%# BEGIN BC EDIT - Libcal Hours Widget scripts%>
+<%# Remove calendar widget for now
 <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script> 
 <script src="https://libcal.bc.edu/js/hours_month.js?002"></script> 
 
@@ -11,6 +12,7 @@
       var s_lc_mhw_609_507 = new $.LibCalHoursCal( $("#s_lc_mhw_609_507"), { iid: 609, lid: 507, months: 3, systemTime: true }); 
     });
   </script> 
+  %>
 <%# END BC EDIT%>
 
 <div class="row">
@@ -44,13 +46,14 @@
     <%# END BC EDIT %>
 
 <%# BEGIN BC EDIT - add library hours from libcal API%>
+<%# Remove Calendar for now
 <div class="row">
   <div class="col-sm-12">
-    <h3><%= t('brand.welcome_hours')%></h3>
+    <h3>t('brand.welcome_hours')</h3>
   </div>
 </div>
 <div id="s_lc_mhw_609_507"></div>  
-<%#END BC EDIT%>
+END BC EDIT%>
 
 <%# BEGIN BC EDIT - move welcome message below search form %>
 <div class="row">
