@@ -125,7 +125,7 @@ Rails.application.config.after_initialize do
         if @result['agent_representation']['_resolved'] && @result['agent_representation']['_resolved']['jsonmodel_type'] == 'agent_corporate_entity'
           @result['repo_info'] = process_repo_info(@result)
         end
-        @sublist_action = "/repositories/#{params[:id]}/"
+        @sublist_action = "/repositories/2/"
         @result['count'] = resources
         @page_title = strip_mixed_content(@result['name'])
         @search = Search.new(params)
@@ -136,7 +136,7 @@ Rails.application.config.after_initialize do
         # but please re-locate and fix!
         # GW: I think its okay here for now, as it would require some re-architecturing the repository show and I dunno if that will break things.
         # @result in the repository view is a hash rather than an object, so it can't access methods in the model
-        @metadata = metadata
+        # @metadata = metadata
 
         render
 
