@@ -127,7 +127,7 @@ Rails.application.config.after_initialize do
         end
         @sublist_action = "/repositories/2/"
         @result['count'] = resources
-        # @page_title = strip_mixed_content(@result['name'])
+        #@page_title = strip_mixed_content(@result['name'])
         @search = Search.new(params)
 
         render
@@ -166,7 +166,7 @@ Rails.application.config.after_initialize do
       info = {}
       info['top'] = {}
       unless repo.nil?
-        %w(uri url parent_institution_name image_url repo_code description).each do |item|
+        %w(name uri url parent_institution_name image_url repo_code description).each do |item|
           info['top'][item] = repo[item] unless repo[item].blank?
         end
         unless repo['agent_representation'].blank? || repo['agent_representation']['_resolved'].blank? || repo['agent_representation']['_resolved']['agent_contacts'].blank? || repo['agent_representation']['_resolved']['jsonmodel_type'] != 'agent_corporate_entity'
