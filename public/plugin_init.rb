@@ -127,16 +127,8 @@ Rails.application.config.after_initialize do
         end
         @sublist_action = "/repositories/2/"
         @result['count'] = resources
-        @page_title = strip_mixed_content(@result['name'])
+        # @page_title = strip_mixed_content(@result['name'])
         @search = Search.new(params)
-
-        # i would like to add this to the model, like the rest of the json-ld md mappings, but the repository model is set up quite differently
-        # and i'm not sure that i'll update everything as needed if i toy with the repo model in the PUI
-        # so, throwing this in the controller for now...
-        # but please re-locate and fix!
-        # GW: I think its okay here for now, as it would require some re-architecturing the repository show and I dunno if that will break things.
-        # @result in the repository view is a hash rather than an object, so it can't access methods in the model
-        # @metadata = metadata
 
         render
 
@@ -174,7 +166,7 @@ Rails.application.config.after_initialize do
       info = {}
       info['top'] = {}
       unless repo.nil?
-        %w(name uri url parent_institution_name image_url repo_code description).each do |item|
+        %w(uri url parent_institution_name image_url repo_code description).each do |item|
           info['top'][item] = repo[item] unless repo[item].blank?
         end
         unless repo['agent_representation'].blank? || repo['agent_representation']['_resolved'].blank? || repo['agent_representation']['_resolved']['agent_contacts'].blank? || repo['agent_representation']['_resolved']['jsonmodel_type'] != 'agent_corporate_entity'
