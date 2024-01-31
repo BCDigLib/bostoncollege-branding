@@ -69,7 +69,7 @@ END BC EDIT%>
   </div>
 
   <div class="abstract">
-    <%= render partial: 'repositories/repository', locals: {:result => @result,  :full => true} %>
+    <%= render partial: 'repositories/repository', locals: {:result => @result,  :full => false} %>
   </div>
 
     <% ASUtils.find_local_directories('public/views/_welcome_addition.html.erb').each do |template| %> 
