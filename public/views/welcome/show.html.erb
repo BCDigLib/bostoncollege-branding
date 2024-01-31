@@ -46,7 +46,6 @@
     <%# END BC EDIT %>
 
 
-
 <%# BEGIN BC EDIT - add library hours from libcal API%>
 <%# Remove Calendar for now
 <div class="row">
@@ -56,6 +55,22 @@
 </div>
 <div id="s_lc_mhw_609_507"></div>  
 END BC EDIT%>
+
+<div class="abstract">
+    <%= render partial: 'repositories/repository', locals: {:result => @result,  :full => true} %>
+  </div>
+
+  <div id="whats-in-container">
+    <h2><%= t('repository.what') %> </h2>
+    <div>
+      <ul class="list-inline">
+	<% @badges.each do |type| %>
+	<%= render partial: 'repositories/badge', locals: {:type => type} %>
+	<% end %>
+      </ul>
+    </div>
+
+  </div>
 
     <% ASUtils.find_local_directories('public/views/_welcome_addition.html.erb').each do |template| %> 
         <%= render(:file => template, :locals => {:record => record}) if File.exists?(template) %>
