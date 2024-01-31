@@ -56,20 +56,20 @@
 <div id="s_lc_mhw_609_507"></div>  
 END BC EDIT%>
 
-<div class="abstract">
-    <%= render partial: 'repositories/repository', locals: {:result => @result,  :full => true} %>
+  <div id="whats-in-container">
+      <h2><%= t('repository.what') %> </h2>
+      <div>
+        <ul class="list-inline">
+    <% @badges.each do |type| %>
+    <%= render partial: 'repositories/badge', locals: {:type => type} %>
+    <% end %>
+        </ul>
+      </div>
+
   </div>
 
-  <div id="whats-in-container">
-    <h2><%= t('repository.what') %> </h2>
-    <div>
-      <ul class="list-inline">
-	<% @badges.each do |type| %>
-	<%= render partial: 'repositories/badge', locals: {:type => type} %>
-	<% end %>
-      </ul>
-    </div>
-
+  <div class="abstract">
+    <%= render partial: 'repositories/repository', locals: {:result => @result,  :full => true} %>
   </div>
 
     <% ASUtils.find_local_directories('public/views/_welcome_addition.html.erb').each do |template| %> 
