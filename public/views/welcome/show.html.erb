@@ -45,20 +45,7 @@
     } %>
     <%# END BC EDIT %>
 
-<%# BEGIN BC EDIT - add accordion panels to show Repo details%>
-<div class="acc_holder clear" >
-  <div class="panel-group" id="res_accordion">
-    <%# unless @repo_info.blank? || @repo_info['top']['name'].blank? %>
-    <% x = render partial: 'repositories/repository_details'%>
-    <% render partial: 'shared/accordion_panel', locals: {
-      :p_title => t('repository.details'), 
-      :p_id => 'repo_deets', 
-      :p_body => x
-      } %>
-      <%# end %>
-  </div>
-</div>
-<%# END BC EDIT%>
+
 
 <%# BEGIN BC EDIT - add library hours from libcal API%>
 <%# Remove Calendar for now
