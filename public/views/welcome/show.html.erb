@@ -45,6 +45,14 @@
     } %>
     <%# END BC EDIT %>
 
+<%# BEGIN BC EDIT - add accordion panels to show Repo details%>
+<div class="acc_holder clear" >
+  <div class="panel-group" id="res_accordion">
+    <% x = render partial: 'shared/accordion_panel', locals: {:p_title => t('repository.details'), :p_id => 'repo_deets', :p_body => x} %>
+  </div>
+</div>
+<%# END BC EDIT%>
+
 <%# BEGIN BC EDIT - add library hours from libcal API%>
 <%# Remove Calendar for now
 <div class="row">
@@ -54,14 +62,6 @@
 </div>
 <div id="s_lc_mhw_609_507"></div>  
 END BC EDIT%>
-
-<%# BEGIN BC EDIT - move welcome message below search form %>
-<div class="row">
-  <div class="col-sm-12">
-      <div> <%= t('brand.welcome_message').html_safe %> </div>
-  </div>
-</div>
-<%# END BC EDIT %>
 
     <% ASUtils.find_local_directories('public/views/_welcome_addition.html.erb').each do |template| %> 
         <%= render(:file => template, :locals => {:record => record}) if File.exists?(template) %>
