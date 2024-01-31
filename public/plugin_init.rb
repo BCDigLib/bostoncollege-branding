@@ -128,7 +128,7 @@ Rails.application.config.after_initialize do
         end
         @sublist_action = "/repositories/2/"
         @result['count'] = resources
-        @page_title = strip_mixed_content(@result['name'])
+        #@page_title = strip_mixed_content(@result['name'])
         @search = Search.new(params)
 
         render
