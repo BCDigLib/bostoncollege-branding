@@ -112,38 +112,37 @@ Rails.application.config.after_initialize do
       @page_title = I18n.t 'brand.welcome_page_title'
       @search = Search.new(params)
       uri = "/repositories/2"
-    resources = {}
-    query = "(id:\"#{uri}\" AND publish:true)"
-    @counts = get_counts("/repositories/2")
-    @criteria = {}
-    @criteria[:page_size] = 1
-    @data = archivesspace.search(query, 1, @criteria) || {}
-    if !@data['results'].blank?
-      @result = ASUtils.json_parse(@data['results'][0]['json'])
-      @badges = Repository.badge_list(@result['repo_code'].downcase)
-      # make the repository details easier to get at in the view
-      if @result['agent_representation']['_resolved'] && @result['agent_representation']['_resolved']['jsonmodel_type'] == 'agent_corporate_entity'
-        @result['repo_info'] = process_repo_info(@result)
+      resources = {}
+      query = "(id:\"#{uri}\" AND publish:true)"
+      @counts = get_counts("/repositories/2")
+      @criteria = {}
+      @criteria[:page_size] = 1
+      @data = archivesspace.search(query, 1, @criteria) || {}
+      if !@data['results'].blank?
+        @result = ASUtils.json_parse(@data['results'][0]['json'])
+        @badges = Repository.badge_list(@result['repo_code'].downcase)
+        # make the repository details easier to get at in the view
+        if @result['agent_representation']['_resolved'] && @result['agent_representation']['_resolved']['jsonmodel_type'] == 'agent_corporate_entity'
+          @result['repo_info'] = process_repo_info(@result)
+        end
+        @sublist_action = "/repositories/#{params[:id]}/"
+        @result['count'] = resources
+        @page_title = strip_mixed_content(@result['name'])
+        @search = Search.new(params)
+
+        # i would like to add this to the model, like the rest of the json-ld md mappings, but the repository model is set up quite differently
+        # and i'm not sure that i'll update everything as needed if i toy with the repo model in the PUI
+        # so, throwing this in the controller for now...
+        # but please re-locate and fix!
+        # GW: I think its okay here for now, as it would require some re-architecturing the repository show and I dunno if that will break things.
+        # @result in the repository view is a hash rather than an object, so it can't access methods in the model
+        @metadata = metadata
+
+        render
+
+      else
+        record_not_found(uri, 'repository')
       end
-      @sublist_action = "/repositories/#{params[:id]}/"
-      @result['count'] = resources
-      @page_title = strip_mixed_content(@result['name'])
-      @search = Search.new(params)
-
-      # i would like to add this to the model, like the rest of the json-ld md mappings, but the repository model is set up quite differently
-      # and i'm not sure that i'll update everything as needed if i toy with the repo model in the PUI
-      # so, throwing this in the controller for now...
-      # but please re-locate and fix!
-      # GW: I think its okay here for now, as it would require some re-architecturing the repository show and I dunno if that will break things.
-      # @result in the repository view is a hash rather than an object, so it can't access methods in the model
-      @metadata = metadata
-
-      render
-
-    else
-      record_not_found(uri, 'repository')
     end
-
   end
-
 end
