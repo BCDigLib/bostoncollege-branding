@@ -121,6 +121,7 @@ Rails.application.config.after_initialize do
       if !@data['results'].blank?
         @result = ASUtils.json_parse(@data['results'][0]['json'])
         @badges = Repository.badge_list(@result['repo_code'].downcase)
+        @badges.delete('classification')
         # make the repository details easier to get at in the view
         if @result['agent_representation']['_resolved'] && @result['agent_representation']['_resolved']['jsonmodel_type'] == 'agent_corporate_entity'
           @result['repo_info'] = process_repo_info(@result)
