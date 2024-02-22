@@ -3,12 +3,12 @@
   # https://github.com/archivesspace/archivesspace/blob/v3.4.0/public/app/views/welcome/show.html.erb
 %>
 <%# BEGIN BC EDIT - Libcal Hours Widget scripts%>
-<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script> 
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script> 
 <script src="https://libcal.bc.edu/js/hours_grid.js?002"></script> 
 
   <script>
     $(function(){ 
-      var week507 = new $.LibCalWeeklyGrid( $("#s_lc_whw507"), { iid: 609, lid: 507, systemTime: true }); 
+      var week507 = new $.LibCalWeeklyGrid( $("#s_lc_whw507"), { iid: 609, lid: 507, systemTime: false }); 
     });
   </script> 
 <%# END BC EDIT%>
@@ -16,10 +16,7 @@
 <div class="row">
   <div class="col-sm-12">
     <h2><%= t('brand.welcome_head') %></h2>
-      <%# BEGIN BC EDIT - move welcome message below search form and add introductory blurb %>
-      <div> <%#= t('brand.welcome_message').html_safe %> </div>
       <div><%= t('brand.welcome_blurb').html_safe %></div>
-      <%# END BC EDIT %>
   </div>
 </div>
 
@@ -44,7 +41,11 @@
     <%# END BC EDIT %>
 
 
-
+  <div class="row">
+    <div class="col-sm-12">
+        <div> <% t('brand.welcome_message').html_safe %> </div>
+    </div>
+  </div>
 
   <div id="whats-in-container">
       <h2><%= t('repository.what') %> </h2>
