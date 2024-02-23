@@ -14,6 +14,7 @@ en:
     welcome_blurb: | 
         <p>Our reference team is happy to assist your research. Use this site to search finding aids, discover archival materials within our collections, and request items for use in the Burns Library Reading Room. To get help navigating the finding aids, <a href="https://bc-primo.hosted.exlibrisgroup.com/primo-explore/search?mode=advanced&vid=bclib_new&lang=en_US&sortby=rank&search_scope=lib_BURNS" target="_blank">the Library Catalog,</a> or to request a more in-depth consultation with our reference staff, <a href="https://libguides.bc.edu/burns/contact" target="_blank">please Contact us</a>!</p>
     welcome_hours: Hours
+    repository_details: Repository Details
   welcome:
     heading: Welcome to BC Libraries ArchivesSpace
     message: For use by authorized staff.
