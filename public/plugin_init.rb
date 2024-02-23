@@ -108,6 +108,63 @@ Rails.application.config.after_initialize do
 
   class WelcomeController < ApplicationController
     # override current welcome page display
+    def metadata
+      md = {
+            '@context' => "http://schema.org/",
+            '@type' => 'ArchiveOrganization',
+            '@id' => AppConfig[:public_proxy_url] + @result['uri'],
+            #this next bit will always be the repo name, not the name associated with the agent record (which is overwritten if the repo record is updated)
+            'name' => @result['agent_representation']['_resolved']['display_name']['sort_name'],
+            'url' => @result['url'],
+            'logo' => @result['image_url'],
+            #this next bit will never work since ASpace has a bug with how it enacts its repo-to-agent concept (at least in versions 2.4 and 2.5).... and you can't add an authority ID directly to a repo record.
+            'sameAs' => @result['agent_representation']['_resolved']['display_name']['authority_id'],
+            'parentOrganization' => {
+              '@type' => 'Organization',
+              'name' => @result['parent_institution_name']
+            }
+            # removing contactPoint, since this would need to be on the repo record (along with different contact types... e.g. reference assistance, digitization requests, whatever)
+            # 'contactPoint' => @result['agent_representation']['_resolved']['agent_contacts'][0]['name']
+          }
+
+      if @result['org_code']
+        if @result['country']
+          md['identifier'] = @result['country']+'-'+ @result['org_code']
+        else
+          md['identifier'] = @result['org_code']
+        end
+      end
+
+      if @result['repo_info']
+
+        md['description'] = @result['repo_info']['top']['description'] if @result['repo_info']['top'] && @result['repo_info']['top']['description']
+        md['email'] = @result['repo_info']['email'] if @result['repo_info']['email']
+
+        if @result['repo_info']['telephones']
+          md['faxNumber'] = @result['repo_info']['telephones']
+            .select {|t| t['number_type'] == 'fax'}
+            .map {|f| f['number']}
+
+          md['telephone'] = @result['repo_info']['telephones']
+            .select {|t| t['number_type'] == 'business'}
+            .map {|b| b['number']}
+        end
+
+        if @result['repo_info']['address']
+          md['address'] = {
+            '@type' => 'PostalAddress',
+            'streetAddress' => @result['repo_info']['address'].join(", "),
+            'addressLocality' => @result['repo_info']['city'],
+            'addressRegion' => @result['repo_info']['region'],
+            'postalCode' => @result['repo_info']['post_code'],
+            'addressCountry' => @result['repo_info']['country']
+          }
+        end
+      end
+
+      md.compact
+    end
+
     def show
       @page_title = I18n.t 'brand.welcome_page_title'
       @search = Search.new(params)
