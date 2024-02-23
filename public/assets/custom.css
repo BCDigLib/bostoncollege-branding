@@ -175,7 +175,10 @@ color:#dccaa0;
 /*Tab pills for Collection overview and organziation*/
 
  .tabbing.nav-pills > li > a {
-	background-color: #8a100b;
+	background-color: #000;
+    }
+.tabbing.nav-pills > li > a.active{
+    background-color: #333;
     }
 
 
