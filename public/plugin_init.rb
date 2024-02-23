@@ -108,6 +108,38 @@ Rails.application.config.after_initialize do
 
   class WelcomeController < ApplicationController
     # override current welcome page display
+    def index
+      @criteria = {}
+      @criteria['sort'] = repositories_sort_by
+      # let's not include any 0-collection repositories unless specified
+      # include_zero = (!params.blank? && params['include_empty'])
+      # ok, page sizing is kind of complicated if not including zero counts
+      page_size =  params['page_size'].to_i if !params.blank?
+      page_size = AppConfig[:pui_search_results_page_size] if page_size == 0
+      query = 'primary_type:repository'
+      facets = find_resource_facet
+      page = params['page'] || 1 if !params.blank?
+      @criteria['page_size'] = 100
+      @search_data = archivesspace.search(query, page, @criteria) || {}
+      @json = []
+
+      if !@search_data['results'].blank?
+        @pager = Pager.new("/repositories?", @search_data['this_page'], @search_data['last_page'])
+        @search_data['results'].each do |result|
+          hash = ASUtils.json_parse(result['json']) || {}
+          id = hash['uri']
+          if !facets[id].blank?
+            hash['count'] = facets[id]
+            @json.push(hash)
+          end
+        end
+      else
+        raise NoResultsError.new("No repository records found!")
+      end
+      @page_title = I18n.t('list', {:type => (@json.length > 1 ? I18n.t('repository._plural') : I18n.t('repository._singular'))})
+      render
+    end
+
     def metadata
       md = {
             '@context' => "http://schema.org/",
