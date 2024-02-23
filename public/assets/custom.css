@@ -270,13 +270,16 @@ color:#dccaa0;
 /* Library Hours Weekly Widget*/
 .s-lc-whw thead { background-color: #8a100b; }
 .s-lc-whw-head-date { color: #ffffff; }
-.s-lc-whw-today-h {  background-color: #DCB8A0; }
-.s-lc-whw-today { background-color: #F5F5F5; }
+.s-lc-whw-today-h {  background-color: #DCB8A0; color:#000}
+.s-lc-whw-today { background-color: #DCB8A0; color:#000}
 .s-lc-whw-bh { text-align: right; white-space: nowrap; }
-.s-lc-whw-locname { font-weight: bold;}
+.s-lc-whw-locname { font-weight: bold; font-size: 14px;}
+.s-lc-whw-locname > a {color:#fff; text-decoration: underline;}
 .s-lc-whw-sublocname{ padding-left: 10px!important; }
 .s-lc-whw-footnote { color: #555; font-size: 80%; }
 .s-lc-whw-footnote td:hover { background-color:#fff!important;}
+.s-lc-whw-prev-507 {display: none;}
+.s-lc-whw-next-507 {display: none;}
 /* Below styles can be removed if you are already using Bootstap v3 in host page */
 .s-lc-whw-cont {font-family: "Helvetica Neue",Helvetica,Arial,sans-serif; font-size: 12px; background-color: #8a100b; color:#fff}
 .s-lc-whw-pr, .s-lc-whw-ne{ padding: 5px 10px; font-size: 12px; line-height: 1.5; border-radius: 3px; color: #333; background-color: #fff; border-color: #ccc; display: inline-block; margin-bottom: 0; font-weight: 400; text-align: center; vertical-align: middle; cursor: pointer; background-image: none; border: 1px solid transparent; white-space: nowrap; }
