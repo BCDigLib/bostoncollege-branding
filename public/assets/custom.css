@@ -319,3 +319,14 @@ form#advanced_search {
 #header > .row {
     height: auto;
 }
+
+/* Repository Details Icons */
+.large-badge.resource{
+    color:#000;
+}
+.large-badge.agent{
+    color:#000;
+}
+.large-badge.digital_object{
+    color:#000;
+}
