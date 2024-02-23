@@ -30,11 +30,16 @@
     <% if result.respond_to?(:ancestors) && result.ancestors %>
       <% result.ancestors.each do |ancestor| %>
         <% ancestor_type = ancestor.fetch('uri').split('/')[3].chop %>
+        <%# BEGIN BC EDIT - applying breadcrumb title patch from here:
+          # https://github.com/archivesspace/archivesspace/commit/52d045761a012be37fad9247c5966640a7f3f546
+          # IMPORTANT: This should be removed when upgrading to v3.5.0 %>
         <%= render partial: 'shared/result_breadcrumbs_ancestor', locals: {
           :span_class => "#{ancestor_type}_name",
           :badge_type => ancestor_type,
-          :body => ancestor.fetch('title'),
+          # :body => ancestor.fetch('title'),
+          :body => ancestor.fetch('title', ancestor['display_string']),
           :url => app_prefix(ancestor.fetch('uri')) } %>
+        <%# END BC EDIT %>
       <% end %>
     <% end %>
   </div>

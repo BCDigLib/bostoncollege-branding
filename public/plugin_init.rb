@@ -19,6 +19,19 @@ Plugins::add_menu_item('/faq', 'plugin.bostoncollege-branding.faq_menu_label')
 
 ## OVERRIDE VARIOUS METHODS/ ADD NEW METHODS
 Rails.application.config.after_initialize do
+
+  # most recent file version: v3.5.0-RC1
+  # https://github.com/archivesspace/archivesspace/blob/v3.5.0-RC1/backend/app/model/search_resolver_compact_resource.rb
+  #
+  # This applies a breadcrumb patch from here:
+  # https://github.com/archivesspace/archivesspace/commit/52d045761a012be37fad9247c5966640a7f3f546
+  # IMPORTANT: This should be removed when upgrading to v3.5.0
+  class SearchResolverCompactResource
+    # this list includes 'display_string'
+    FIELDS_TO_KEEP = ['id_0', 'id_1', 'id_2', 'id_3', 'level', 'other_level', 'title', 'display_string', 'uri', 'publish']
+  end
+  
+
   # most recent file version: v3.4.0
   # https://github.com/archivesspace/archivesspace/blob/v3.4.0/public/app/models/record.rb
   class Record
