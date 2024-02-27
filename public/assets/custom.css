@@ -279,7 +279,7 @@ color:#dccaa0;
 .s-lc-whw-locname { font-weight: bold; font-size: 14px;}
 .s-lc-whw-locname > a {color:#fff; text-decoration: underline;}
 .s-lc-whw-sublocname{ padding-left: 10px!important; }
-.s-lc-whw-loc-tr-507 tr:hover {background-color: #8a100b;}
+tr.s-lc-whw-loc.s-lc-whw-loc-tr-507.s-lc-whw-libbg-507:hover{ background-color: #8a100b;}
 .s-lc-whw-footnote { color: #555; font-size: 80%; }
 .s-lc-whw-footnote td:hover { background: color #fff!important;}
 /* Below styles can be removed if you are already using Bootstap v3 in host page */
