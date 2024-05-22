@@ -423,6 +423,7 @@ class EADSerializer < ASpaceExport::Serializer
             xml.send(node_data[:node_name], node_data[:atts]) {
               sanitize_mixed_content( node_data[:content], xml, fragments, ASpaceExport::Utils.include_p?(node_data[:node_name]) )
             }
+          end
         end
 
         data.controlaccess_linked_agents(@include_unpublished).each do |node_data|
@@ -430,6 +431,7 @@ class EADSerializer < ASpaceExport::Serializer
             xml.send(node_data[:node_name], node_data[:atts]) {
               sanitize_mixed_content( node_data[:content], xml, fragments, ASpaceExport::Utils.include_p?(node_data[:node_name]) )
             }
+          end
         end
       } #</controlaccess>
     end
