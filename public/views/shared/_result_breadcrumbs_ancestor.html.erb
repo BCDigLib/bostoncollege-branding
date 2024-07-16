@@ -1,0 +1,13 @@
+<%#
+  # most recent file version: v3.4.0
+  # https://github.com/archivesspace/archivesspace/blob/v3.4.0/public/app/views/shared/_result_breadcrumbs_ancestor.html.erb
+%>
+
+<%# TODO: hide first delimiter %>
+<% if !local_assigns[:hide_delimiter] %>
+  <%= t('context_delimiter') %>
+<% end %>
+<span class="<%= span_class %>">
+  <%= badge_for_type badge_type %>
+  <%= link_to body, url %>
+</span>

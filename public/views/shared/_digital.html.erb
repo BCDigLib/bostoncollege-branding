@@ -1,42 +1,93 @@
 <%#
-  # most recent file version: v3.2.0
-  # https://github.com/archivesspace/archivesspace/blob/v3.2.0/public/app/views/shared/_digital.html.erb
+  # most recent file version: v3.4.0
+  # https://github.com/archivesspace/archivesspace/blob/v3.4.0/public/app/views/shared/_digital.html.erb
 %>
 
-<%# expects 'dig_objs' as an array of hashes %>
-<% unless dig_objs.blank? %>
-<%# BEGIN BC EDIT - add col sizing %>
-<div class="images col-sm-3 col-md-3 col-lg-2">
-<%# END BC EDIT %>
+<% if record['json']['representative_file_version'].present? %>
+<div class="available-digital-objects">
+  <div class="objectimage">
+    <div class="panel panel-default">
+      <%
+        rfv = record['json']['representative_file_version']
+        img_uri = rfv['file_uri']
+        a_uri = rfv['derived_from'] || rfv['link_uri']
+
+        # BEGIN BC EDIT - pull out file_uri from file_versions list, and use it to make the thumbnail image clickable
+        if record['json']['file_versions'].present? && record['json']['representative_file_version'].present?
+          record_file_version_object = record['json']['file_versions'].find { |fv| fv['publish'] && fv['file_uri'] != record['json']['representative_file_version']['file_uri'] }
+          unless record_file_version_object.nil?
+            # replace a_uri with the file_uri string
+            a_uri = record_file_version_object['file_uri']
+          end
+        end
+        # END BC EDIT
+      %>
+      <%= render partial: 'shared/representative_file_version_record', locals: {
+        :a_uri => a_uri,
+        :img_uri => img_uri,
+        :caption => rfv['caption']
+      } %>
+      <% if representative_link_to_digital_materials?(record) %>
+        <% digitized_link_text = t(
+          'digital_object._public.browse_number_digital_objects_in_collection',
+          num: n_digital_objects
+        ) %>
+        <p class="mb0 pb1 rounded-bottom bg-lightgray">
+          <%= link_to digitized_link_text,
+              app_prefix("/repositories/#{params[:rid]}/resources/#{params[:id]}/digitized"),
+              class: 'view-all'
+          %>
+        </p>
+      <% end %>
+    </div>
+  </div>
+</div>
+<% elsif local_assigns[:dig_objs] && dig_objs.present? %>
+<div class="available-digital-objects">
   <% dig_objs.each do |d_file| %>
     <% if !d_file['out'].blank? %>
       <% if d_file['thumb'].blank? %>
         <div class="objectimage">
           <div class="panel panel-default">
-            <a class="btn btn-default record-type-badge digital_object" style="width: 100%" href="<%= d_file['out'] %>" target="new" title="<%= t('digital_object._public.link')%>">
+          <a
+            class="btn btn-default external-digital-object__link record-type-badge digital_object"
+            href="<%= d_file['out'] %>"
+            target="new"
+            title="<%= t('digital_object._public.link')%>"
+          >
+            <div class="external-digital-object__content-container">
               <i class="fa <%= { '(moving_image)' => 'fa-file-video-o' ,
                           '(sound_recording)' => 'fa-file-audio-o',
                           '(sound_recording_musical)' => 'fa-file-audio-o',
                           '(sound_recording_nonmusical)' => 'fa-file-audio-o' ,
                           '(still_image)' => 'fa-file-image-o' ,
-                          '(text)' =>  'fa-file-text'}.fetch( d_file['material'], 'fa-file-o' ) %> fa-4x"></i><br/>
-              <div class="panel-heading">
+                          '(text)' =>  'fa-file-text-o'}.fetch( d_file['material'], 'fa-file-o' ) %> fa-4x"></i>
+              <h5 class="ws-normal">
                 <%= d_file['caption'].blank? ? "#{t('enumerations.instance_instance_type.digital_object')} #{d_file['material']}" : d_file['caption'].html_safe %>
-              </div>
-            </a>
+              </h5>
+              <p class="external-digital-object__content-btn">
+                <%= t('digital_object._public.go')%> <i class="fa fa-external-link" aria-hidden="true"></i>
+              </p>
+            </div>
+          </a>
           </div>
         </div>
       <% else %>
         <div class="objectimage">
           <div class="panel panel-default">
             <a class="thumbnail" href="<%= d_file['out'] %>" target="new" title="<%= t('digital_object._public.link')%>">
-              <img src="<%= d_file['thumb'] %>" alt="<%= strip_mixed_content(d_file['caption'] || t('enumerations.instance_instance_type.digital_object')) %>" />     
-	            <%# BEGIN BC EDIT - include link to DAO %>
-              <div class="panel-link">
-	              <%= t('digital_object._public.link').html_safe %>
-	            </div>
-              <%# END BC EDIT %>
-            </a>
+              <img src="<%= d_file['thumb'] %>" alt="<%= strip_mixed_content(d_file['caption'] || t('enumerations.instance_instance_type.digital_object')) %>" />
+            <%# BEGIN BC EDIT - include link to DAO %>
+            <div class="panel-link">
+              <p class="mb0 pb1 rounded-bottom bg-lightgray">
+              <%= t('digital_object._public.link').html_safe %>
+              </p>
+            </div>
+           </a>
+                 <!-- <div class="panel-heading">
+                    <%= (d_file['caption'] || t('enumerations.instance_instance_type.digital_object')).html_safe %>
+                  </div> -->
+            <%# END BC EDIT %>
           </div>
         </div>
       <% end %>

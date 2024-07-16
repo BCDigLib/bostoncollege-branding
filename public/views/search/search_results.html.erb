@@ -1,6 +1,6 @@
 <%#
-  # most recent file version: v3.2.0
-  # https://github.com/archivesspace/archivesspace/blob/v3.2.0/public/app/views/search/search_results.html.erb
+  # most recent file version: v3.4.0
+  # https://github.com/archivesspace/archivesspace/blob/v3.4.0/public/app/views/search/search_results.html.erb
 %>
 
 <% results_type = (defined?(@results_type) ? @results_type : t('search_results.results')) %>
@@ -89,7 +89,7 @@
     <%= render partial: 'shared/pagination', locals: {:pager  => @pager, :pager_id => 'paging_bottom'}  %>
     </div></div>
   </div>
-  <div class="col-sm-3">
+  <div id="filter-sidebar" class="col-sm-3">
     <a name="filter" title="<%= t('internal_links.filter') %>"></a>
     <%= render partial: 'shared/facets' %>
   </div>

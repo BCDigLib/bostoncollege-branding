@@ -1,7 +1,7 @@
 # encoding: utf-8
 
-# most recent file version: v3.2.0
-# https://github.com/archivesspace/archivesspace/blob/v3.2.0/backend/app/exporters/serializers/ead.rb
+# most recent file version: v3.4.0
+# https://github.com/archivesspace/archivesspace/blob/v3.4.0/backend/app/exporters/serializers/ead.rb
 
 # BC local edits:
 #  see method serialize_languages()
@@ -201,6 +201,8 @@ class EADSerializer < ASpaceExport::Serializer
 
             handle_arks(data, xml)
 
+            serialize_aspace_uri(data, xml)
+
             serialize_extents(data, xml, @fragments)
 
             serialize_dates(data, xml, @fragments)
@@ -219,8 +221,10 @@ class EADSerializer < ASpaceExport::Serializer
 
           }# </did>
 
-          data.digital_objects.each do |dob|
-            serialize_digital_object(dob, xml, @fragments)
+          if @include_daos
+            data.instances_with_digital_objects.each do |instance|
+              serialize_digital_object(instance['digital_object']['_resolved'], xml, @fragments)
+            end
           end
 
           serialize_nondid_notes(data, xml, @fragments)
@@ -251,6 +255,10 @@ class EADSerializer < ASpaceExport::Serializer
     Enumerator.new do |y|
       @stream_handler.stream_out(doc, @fragments, y)
     end
+  end
+
+  def serialize_aspace_uri(data, xml)
+    xml.unitid ({ 'type' => 'aspace_uri' }) { xml.text data.uri }
   end
 
   def handle_arks(data, xml)
@@ -320,6 +328,8 @@ class EADSerializer < ASpaceExport::Serializer
         end
 
         handle_arks(data, xml)
+
+        serialize_aspace_uri(data, xml)
 
         if @include_unpublished
           data.external_ids.each do |exid|
@@ -406,18 +416,22 @@ class EADSerializer < ASpaceExport::Serializer
   end
 
   def serialize_controlaccess(data, xml, fragments)
-    if (data.controlaccess_subjects.length + data.controlaccess_linked_agents.length) > 0
+    if (data.controlaccess_subjects.length + data.controlaccess_linked_agents(@include_unpublished).length) > 0
       xml.controlaccess {
         data.controlaccess_subjects.each do |node_data|
-          xml.send(node_data[:node_name], node_data[:atts]) {
-            sanitize_mixed_content( node_data[:content], xml, fragments, ASpaceExport::Utils.include_p?(node_data[:node_name]) )
-          }
+          if(node_data && node_data[:node_name] && node_data[:atts])
+            xml.send(node_data[:node_name], node_data[:atts]) {
+              sanitize_mixed_content( node_data[:content], xml, fragments, ASpaceExport::Utils.include_p?(node_data[:node_name]) )
+            }
+          end
         end
 
-        data.controlaccess_linked_agents.each do |node_data|
-          xml.send(node_data[:node_name], node_data[:atts]) {
-            sanitize_mixed_content( node_data[:content], xml, fragments, ASpaceExport::Utils.include_p?(node_data[:node_name]) )
-          }
+        data.controlaccess_linked_agents(@include_unpublished).each do |node_data|
+          if(node_data && node_data[:node_name] && node_data[:atts])
+            xml.send(node_data[:node_name], node_data[:atts]) {
+              sanitize_mixed_content( node_data[:content], xml, fragments, ASpaceExport::Utils.include_p?(node_data[:node_name]) )
+            }
+          end
         end
       } #</controlaccess>
     end
@@ -487,7 +501,7 @@ class EADSerializer < ASpaceExport::Serializer
     atts[:id] = prefix_id(SecureRandom.hex)
     last_id = atts[:id]
 
-    atts[:type] = top['type']
+    atts[:type] = top['type'] unless (top['type'].nil? || top['type'].empty?)
     text = top['indicator']
 
     atts[:label] = I18n.t("enumerations.instance_instance_type.#{inst['instance_type']}",
@@ -539,7 +553,6 @@ class EADSerializer < ASpaceExport::Serializer
 
     title = digital_object['title']
     date = digital_object['dates'][0] || {}
-
     atts = {}
 
     content = ""
@@ -571,7 +584,11 @@ class EADSerializer < ASpaceExport::Serializer
       atts['xlink:type'] = 'simple'
       atts['xlink:actuate'] = file_version['xlink_actuate_attribute'] || 'onRequest'
       atts['xlink:show'] = file_version['xlink_show_attribute'] || 'new'
-      atts['xlink:role'] = file_version['use_statement'] if file_version['use_statement']
+      atts['xlink:role'] = if file_version['use_statement'] && digital_object['_is_in_representative_instance']
+                             [file_version['use_statement'], 'representative'].join(' ')
+                           elsif file_version['use_statement']
+                             file_version['use_statement']
+                           end
       atts['xlink:href'] = file_version['file_uri']
       atts['audience'] = 'internal' unless is_digital_object_published?(digital_object, file_version)
       xml.dao(atts) {
@@ -580,6 +597,9 @@ class EADSerializer < ASpaceExport::Serializer
     else
       atts['xlink:type'] = 'extended'
       atts['audience'] = 'internal' unless is_digital_object_published?(digital_object)
+      if digital_object['_is_in_representative_instance']
+        atts['xlink:role'] = 'representative'
+      end
       xml.daogrp( atts ) {
         xml.daodesc { sanitize_mixed_content(content, xml, fragments, true) } if content
         file_versions_to_display.each do |file_version|
@@ -599,6 +619,7 @@ class EADSerializer < ASpaceExport::Serializer
         end
       }
     end
+    EADSerializer.run_serialize_step(digital_object, xml, fragments, :dao)
   end
 
 

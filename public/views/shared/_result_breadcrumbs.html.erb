@@ -1,0 +1,47 @@
+<%#
+  # most recent file version: v3.4.0
+  # https://github.com/archivesspace/archivesspace/blob/v3.4.0/public/app/views/shared/_result_breadcrumbs.html.erb
+%>
+
+<%
+  top_level_records = [Accession, Classification, Record, Resource]
+  can_have_linked_instances = [DigitalObject]
+  children_records = [ArchivalObject, DigitalObjectComponent]
+%>
+
+<%# TODO: don't show found-in list for top level records %>
+<% if top_level_records.include? result.class %>
+
+  <div class="result_context">
+    <%= render partial: 'shared/result_breadcrumbs_repo', locals: { :result => result } %>
+  </div>
+
+<% elsif can_have_linked_instances.include? result.class %>
+
+  <%= render partial: 'digital_objects/search_result_breadcrumbs', locals: {
+    :result => result,
+    :props => props
+  } %>
+
+<% elsif children_records.include? result.class %>
+
+  <div class="result_context">
+    <%= render partial: 'shared/result_breadcrumbs_repo', locals: { :result => result } %>
+    <% if result.respond_to?(:ancestors) && result.ancestors %>
+      <% result.ancestors.each do |ancestor| %>
+        <% ancestor_type = ancestor.fetch('uri').split('/')[3].chop %>
+        <%# BEGIN BC EDIT - applying breadcrumb title patch from here:
+          # https://github.com/archivesspace/archivesspace/commit/52d045761a012be37fad9247c5966640a7f3f546
+          # IMPORTANT: This should be removed when upgrading to v3.5.0 %>
+        <%= render partial: 'shared/result_breadcrumbs_ancestor', locals: {
+          :span_class => "#{ancestor_type}_name",
+          :badge_type => ancestor_type,
+          # :body => ancestor.fetch('title'),
+          :body => ancestor.fetch('title', ancestor['display_string']),
+          :url => app_prefix(ancestor.fetch('uri')) } %>
+        <%# END BC EDIT %>
+      <% end %>
+    <% end %>
+  </div>
+
+<% end %>

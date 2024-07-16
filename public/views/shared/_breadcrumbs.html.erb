@@ -1,13 +1,13 @@
 <%#
-  # most recent file version: v3.2.0
-  # https://github.com/archivesspace/archivesspace/blob/v3.2.0/public/app/views/shared/_breadcrumbs.html.erb
+  # most recent file version: v3.4.0
+  # https://github.com/archivesspace/archivesspace/blob/v3.4.0/public/app/views/shared/_breadcrumbs.html.erb
 %>
 
 <%# BEGIN BC EDIT - don't show breadcrumbs for top level records %>
 <% if defined?(@context) && !@context.blank? && @context.length > 2 %>
 <%# END BC EDIT %>
 <div class="clear">
-    <nav aria-label="hierarchical navigation">
+    <nav aria-label="<%= I18n.t('navigation.hierarchical') %>">
       <ul class="breadcrumb">
         <%# BEGIN BC EDIT - include prefix string to breadcrumbs %>
         <li class="breadcrumb-prefix"><%= t('context') %>: </li>
