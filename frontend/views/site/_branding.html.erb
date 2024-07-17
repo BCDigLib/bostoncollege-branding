@@ -4,5 +4,5 @@
 %>
 
 <div class="container-fluid navbar-branding">
-  <img class="logo img-responsive" src="/assets/images/logo-test.png" alt="ArchivesSpace test">
+  <%= image_tag asset_path(AppConfig[:frontend_branding_img]), :class =>"header-logo", :alt => AppConfig[:frontend_branding_img_alt_text]  %>
 </div>

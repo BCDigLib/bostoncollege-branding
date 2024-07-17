@@ -1,6 +1,6 @@
 <%#
-  # most recent file version: v3.4.0
-  # https://github.com/archivesspace/archivesspace/blob/v3.4.0/public/app/views/shared/_result_record_summary.html.erb
+  # most recent file version: v3.5.1
+  # https://github.com/archivesspace/archivesspace/blob/v3.5.1/public/app/views/shared/_result_record_summary.html.erb
 %>
 
 <div class="recordsummary" style="clear:both">
@@ -11,11 +11,10 @@
     </div>
   <% end %>
 
-  <% 
-   
+  <%
     note_struct = result.note('abstract')
     if note_struct.blank?
-    note_struct = result.note('scopecontent')
+        note_struct = result.note('scopecontent')
     end
     if !note_struct['note_text'].blank?
   %>
@@ -35,9 +34,11 @@
   <% end %>
   
   <%# BEGIN BC EDIT - include accessrestrict note for each record on search results page %>
-     <% note_struct = result.note('accessrestrict')
-      if !note_struct['note_text'].blank? %>
-      <div class="abstract single_note">
+  <% 
+    note_struct = result.note('accessrestrict')
+    if !note_struct['note_text'].blank? 
+  %>
+    <div class="abstract single_note">
       <span class='inline-label'><%= note_struct['label'] %></span>
       <% unless note_struct['is_inherited'].blank? %>
         <%= inheritance(note_struct['is_inherited']).html_safe %>
@@ -50,8 +51,8 @@
         <%= note_struct['note_text'].html_safe %>
       <% end %>
     </div>
-    <% end %>
-    <%# END BC EDIT %>
+  <% end %>
+  <%# END BC EDIT %>
 
   <% unless props.fetch(:no_repo, false) %>
     <%

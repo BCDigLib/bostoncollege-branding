@@ -1,13 +1,22 @@
 <%#
-  # most recent file version: v3.4.0
-  # https://github.com/archivesspace/archivesspace/blob/v3.4.0/public/app/views/shared/_result_breadcrumbs_ancestor.html.erb
+  # most recent file version: v3.5.1
+  # https://github.com/archivesspace/archivesspace/blob/v3.5.1/public/app/views/shared/_result_breadcrumbs_ancestor.html.erb
 %>
 
-<%# TODO: hide first delimiter %>
+<%# BC TODO: hide first delimiter %>
+<%# BC NOTE: code has not been changed yet %>
+
 <% if !local_assigns[:hide_delimiter] %>
   <%= t('context_delimiter') %>
 <% end %>
 <span class="<%= span_class %>">
   <%= badge_for_type badge_type %>
-  <%= link_to body, url %>
+
+  <% # there could be styling on this title and we can't have it inside the anchor tag %>
+  <% if body.include? '<span' %>
+    <% tag = Nokogiri::HTML::DocumentFragment.parse(body) %>
+    <span class="<%= tag.css('span').attr('class') %>"> <%= link_to tag.content, url %> </span>
+  <% else %>
+    <%= link_to body, url %>
+  <% end %>
 </span>

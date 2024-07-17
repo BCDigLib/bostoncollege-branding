@@ -19,50 +19,46 @@ Plugins::add_menu_item('/faq', 'plugin.bostoncollege-branding.faq_menu_label')
 
 ## OVERRIDE VARIOUS METHODS/ ADD NEW METHODS
 Rails.application.config.after_initialize do
-
-  # most recent file version: v3.5.0-RC1
-  # https://github.com/archivesspace/archivesspace/blob/v3.5.0-RC1/backend/app/model/search_resolver_compact_resource.rb
   #
-  # This applies a breadcrumb patch from here:
-  # https://github.com/archivesspace/archivesspace/commit/52d045761a012be37fad9247c5966640a7f3f546
-  # IMPORTANT: This should be removed when upgrading to v3.5.0
-  class SearchResolverCompactResource
-    # this list includes 'display_string'
-    FIELDS_TO_KEEP = ['id_0', 'id_1', 'id_2', 'id_3', 'level', 'other_level', 'title', 'display_string', 'uri', 'publish']
-  end
-  
-
-  # most recent file version: v3.4.0
-  # https://github.com/archivesspace/archivesspace/blob/v3.4.0/public/app/models/record.rb
+  # most recent file version: v3.5.1
+  # https://github.com/archivesspace/archivesspace/blob/v3.5.1/public/app/models/record.rb
+  #
   class Record
-    # include "accessrestrict" in list of notes to fetch and render on search results page
+    # BC NOTE: include "accessrestrict" in list of notes to fetch and render on search results page
     ABSTRACT = %w(abstract scopecontent accessrestrict)
   end
 
-  # most recent file version: v3.4.0
-  # https://github.com/archivesspace/archivesspace/blob/v3.4.0/public/app/controllers/search_controller.rb
+  #
+  # most recent file version: v3.5.1
+  # https://github.com/archivesspace/archivesspace/blob/v3.5.1/public/app/controllers/search_controller.rb
+  #
   class SearchController < ApplicationController
-    # remove "subjects" and "repository" facets from "Additional filters" list
+    # BC NOTE: remove "subjects" and "repository" facets from "Additional filters" list
     DEFAULT_SEARCH_FACET_TYPES = ['primary_type', 'published_agents', 'langcode']
 
-    # remove "subject" from list of record types to search
+    # BC NOTE: remove "subject" from list of record types to search
     DEFAULT_TYPES = %w{archival_object digital_object digital_object_component agent resource repository accession classification}
   end
 
-  # most recent file version: v3.4.0
-  # https://github.com/archivesspace/archivesspace/blob/v3.4.0/public/app/controllers/resources_controller.rb
+  #
+  # most recent file version: v3.5.1
+  # https://github.com/archivesspace/archivesspace/blob/v3.5.1/public/app/controllers/resources_controller.rb
+  #
   class ResourcesController < ApplicationController
-    # remove "subjects" from list of resource facet types
+    # BC NOTE: remove "subjects" from list of resource facet types
     DEFAULT_RES_FACET_TYPES = %w{primary_type published_agents langcode}
   end
 
-  # most recent file version: v3.4.0
-  # https://github.com/archivesspace/archivesspace/blob/v3.4.0/public/app/controllers/agents_controller.rb
+  #
+  # most recent file version: v3.5.1
+  # https://github.com/archivesspace/archivesspace/blob/v3.5.1/public/app/controllers/agents_controller.rb
+  #
   class AgentsController < ApplicationController
-    # remove "subjects" from list of agent facet types
+    # BC NOTE: remove "subjects" from list of agent facet types
     DEFAULT_AG_FACET_TYPES = %w{primary_type}
 
-    # remove "repository" from list of agent facet types, it was being added by default, see commented out code for context
+    # BC NOTE: remove "repository" from list of agent facet types, it was being added by default, 
+    #          see commented out code for context
     def index
       repo_id = params.fetch(:rid, nil)
       Rails.logger.debug("repo_id: #{repo_id}")
@@ -75,7 +71,8 @@ Rails.application.config.after_initialize do
       search_opts['fq'] = ["used_within_published_repository:\"/repositories/#{repo_id}\""] if repo_id
       @base_search = repo_id ? "/repositories/#{repo_id}/agents?" : '/agents?'
       default_facets = DEFAULT_AG_FACET_TYPES.dup
-      # only use original DEFAULT_AG_FACET_TYPES values; don't add "repository" to list of facet types
+      # BC NOTE: only use original DEFAULT_AG_FACET_TYPES values; 
+      #          don't add "repository" to list of facet types
       # default_facets.push('used_within_published_repository') unless repo_id
       page = Integer(params.fetch(:page, "1"))
 
@@ -112,15 +109,21 @@ Rails.application.config.after_initialize do
 
   end
 
-  # most recent file version: v3.4.0
-  # https://github.com/archivesspace/archivesspace/blob/v3.4.0/public/app/controllers/objects_controller.rb
+  #
+  # most recent file version: v3.5.1
+  # https://github.com/archivesspace/archivesspace/blob/v3.5.1/public/app/controllers/objects_controller.rb
+  #
   class ObjectsController < ApplicationController
-    # remove "subjects" from list of object facet types
+    # BC NOTE: remove "subjects" from list of object facet types
     DEFAULT_OBJ_FACET_TYPES = %w(repository primary_type published_agents langcode)
   end
 
+  #
+  # most recent file version: v3.5.1
+  # https://github.com/archivesspace/archivesspace/blob/v3.5.1/public/app/controllers/welcome_controller.rb
+  #
   class WelcomeController < ApplicationController
-    # override current welcome page display
+    # BC NOTE: override current welcome page display
     def index
       @criteria = {}
       @criteria['sort'] = repositories_sort_by

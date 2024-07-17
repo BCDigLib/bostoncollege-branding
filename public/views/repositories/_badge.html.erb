@@ -1,3 +1,8 @@
+<%#
+  # most recent file version: v3.5.1
+  # https://github.com/archivesspace/archivesspace/blob/v3.5.1/public/app/views/repositories/_badge.html.erb
+%>
+
 <%# the "badges" for resources, records, etc.  Expects one local: type[ of badge]. @sublist_action, @counts, and @result carry through %>
 
 <li class="large-badge align-center <%= type %>">
@@ -17,7 +22,9 @@
      <% when 'subject' %>
       <i class="fa fa-tags fa-4x"></i>
      <% when 'agent' %>
+      <%# BEGIN BC EDIT - Simplify agent icon. %>
       <i class="fa fa-people-group fa-4x"></i>
+      <%# END BC EDIT %>
      <% when 'classification' %>
       <i class="fa fa-share-alt fa-4x"></i>
      <% end %>

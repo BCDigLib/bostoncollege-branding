@@ -1,8 +1,9 @@
 <%#
-  # most recent file version: v3.4.0
-  # https://github.com/archivesspace/archivesspace/blob/v3.4.0/public/app/views/welcome/show.html.erb
+  # most recent file version: v3.5.1
+  # https://github.com/archivesspace/archivesspace/blob/v3.5.1/public/app/views/welcome/show.html.erb
 %>
-<%# BEGIN BC EDIT - Libcal Hours Widget scripts%>
+
+<%# BEGIN BC EDIT - Libcal Hours Widget scripts %>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script> 
 <script src="https://libcal.bc.edu/js/hours_grid.js?002"></script> 
 <script src="https://kit.fontawesome.com/5f01866b2e.js" crossorigin="anonymous"></script>
@@ -12,7 +13,9 @@
       var week507 = new $.LibCalWeeklyGrid( $("#s-lc-whw507"), { iid: 609, lid: 507, systemTime: false }); 
     });
   </script> 
-<%# END BC EDIT%>
+<%# END BC EDIT %>
+
+<%= render partial: 'shared/language_select' %>
 
 <div class="row">
   <div class="col-sm-12">
@@ -57,39 +60,46 @@
     <% end %>
         </ul>
       </div>
-
   </div>
-<div class="row">
+
+  <div class="row">
     <div class="col-sm-12">
         <h3> <%= t('brand.repository_details') %> </h3>
     </div>
   </div>
+
   <div class="abstract">
     <%= render partial: 'repositories/repository', locals: {:result => @result,  :full => true} %>
+  </div>
 
-<div class="row">
+  <div class="row">
     <div class="col-sm-12">
         <h3> <%= t('brand.location') %> </h3>
     </div>
   </div>
+
+  <%# BEGIN BC EDIT - add interactive map %>
   <div class="mapouter">
     <div class="gmap_canvas">
-      <iframe class="gmap_iframe" width="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=600&amp;height=200&amp;hl=en&amp;q=john j burns library&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed">
-      </iframe>
+      <iframe title="Interactive map for Burns Library" class="gmap_iframe" width="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=600&amp;height=200&amp;hl=en&amp;q=john j burns library&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe>
     </div>
-    <style>.mapouter{position:relative;text-align:right;width:100%;height:200px;}.gmap_canvas {overflow:hidden;background:none!important;width:100%;height:200px;}.gmap_iframe {height:200px!important;}
+    <style>
+        .mapouter {position:relative; text-align:right; width:100%; height:200px;} 
+        .gmap_canvas {overflow:hidden; background:none!important; width:100%; height:200px;}
+        .gmap_iframe {height:200px!important;}
     </style>
   </div>
+  <%# END BC EDIT %>
 
-  <%# BEGIN BC EDIT - add library hours from libcal API%>
+  <%# BEGIN BC EDIT - add library hours from libcal API %>
   <div class="row">
     <div class="col-sm-12">
       <h3><%= t('brand.welcome_hours') %></h3>
     </div>
   </div>
   <div id="s-lc-whw507"></div>   
-  <%#END BC EDIT%>
+  <%# END BC EDIT %>
 
-    <% ASUtils.find_local_directories('public/views/_welcome_addition.html.erb').each do |template| %> 
-        <%= render(:file => template, :locals => {:record => record}) if File.exists?(template) %>
+    <% ASUtils.find_local_directories('public/views/_welcome_addition.html.erb').each do |template| %>
+        <%= render(:file => template) if File.exists?(template) %>
     <% end %>

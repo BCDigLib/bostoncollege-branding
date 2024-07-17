@@ -1,21 +1,26 @@
+<%#
+  # most recent file version: v3.5.1
+  # https://github.com/archivesspace/archivesspace/blob/v3.5.1/public/app/views/repositories/_repository.html.erb
+%>
+
 <% if !full %>
    <div class="recordrow">
 <% end %>
 
     <div class="badge-and-identifier">
        
-	    <div class="<%= (full ? 'clear' : 'recordsummary') %>">
-	    <% if result['parent_institution_name'].present? %>
-	        <div><strong><%= t('parent_inst') %>:</strong>
-	            <%= result['parent_institution_name'] %>
-	        </div>
-	    <% end %>
-	    <% if full %>
-	        <%= render partial: 'repositories/full_repo', locals: {:info => result['repo_info'], :url => result['url']} %>
-	    <% else %>
-	        <div><strong>Number of <%= t('resource._plural') %>:</strong> <%= result['count'] %></div>
-	    <% end %>
-	    </div>
+        <div class="<%= (full ? 'clear' : 'recordsummary') %>">
+            <% if result['parent_institution_name'].present? %>
+            <div><strong><%= t('parent_inst') %>:</strong>
+                <%= result['parent_institution_name'] %>
+            </div>
+            <% end %>
+            <% if full %>
+            <%= render partial: 'repositories/full_repo', locals: {:info => result['repo_info'], :url => result['url']} %>
+            <% else %>
+            <div><strong>Number of <%= t('resource._plural') %>:</strong> <%= result['count'] %></div>
+            <% end %>
+        </div>
     </div>
 <% if !full %>
    </div>
