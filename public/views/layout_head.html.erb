@@ -4,3 +4,15 @@
 
 <%= stylesheet_link_tag "#{@base_url}/assets/custom.css" %>
 <%= javascript_include_tag "#{@base_url}/assets/custom.js" %>
+
+<%#
+  # Load web analytics trackers
+%>
+<!-- START LOADING ANALYTICS TRACKERS -->
+<% if AppConfig.has_key?(:analytics_id_ga) && !AppConfig[:analytics_id_ga].nil? && !AppConfig[:analytics_id_ga].empty? %>
+    <%= render partial: 'shared/analytics_ga', locals: {:id => AppConfig[:analytics_id_ga]} %>
+<% end %>
+<% if AppConfig.has_key?(:analytics_id_matomo) && !AppConfig[:analytics_id_matomo].nil? && !AppConfig[:analytics_id_matomo].empty? %>
+    <%= render partial: 'shared/analytics_matomo', locals: {:id => AppConfig[:analytics_id_matomo]} %>
+<% end %>
+<!-- END LOADING ANALYTICS TRACKERS -->
