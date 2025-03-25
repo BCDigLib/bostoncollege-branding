@@ -1,13 +1,13 @@
 <%#
-  # most recent file version: v3.5.1
-  # https://github.com/archivesspace/archivesspace/blob/v3.5.1/public/app/views/shared/_footer.html.erb
+  # most recent file version: v4.0.0
+  # https://github.com/archivesspace/archivesspace/blob/v4.0.0/public/app/views/shared/_footer.html.erb
 %>
 
-<div class="container-fluid panel-footer">
+<div class="container-fluid panel-footer p-3 bg-lightgray border-top-default">
   <div class="row">
      <div class="col-md-12">
        <%# BEGIN BC EDIT - remove staff interface link and ASpace link %>
-       <p class="footer-items">
+       <p class="footer-items mb-0">
          <!-- <%= I18n.t("footer.staff_interface", staff_url: AppConfig[:frontend_proxy_url]).html_safe %> -->
          <!--| <%= I18n.t("footer.archivesspace_home").html_safe %> -->
          <!--| --> <%= ASConstants.VERSION %>

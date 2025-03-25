@@ -1,14 +1,12 @@
 <%#
-  # most recent file version: v3.5.1
-  # https://github.com/archivesspace/archivesspace/blob/v3.5.1/public/app/views/resources/_linked_digital_objects.html.erb
+  # most recent file version: v4.0.0
+  # https://github.com/archivesspace/archivesspace/blob/v4.0.0/public/app/views/resources/_linked_digital_objects.html.erb
 %>
 
 <ul>
   <% digital_objects.each do |uri, digital_object| %>
     <li>
-      <%# BEGIN BC EDIT - allow link title to render html elements %>
-      <%= link_to digital_object.display_string.html_safe, app_prefix(uri) %>
-      <%# END BC EDIT %>
+      <%= render partial: 'shared/mixed_content_link', locals: { :content => digital_object.display_string, :uri => uri } %>
     </li>
   <% end %>
 </ul>

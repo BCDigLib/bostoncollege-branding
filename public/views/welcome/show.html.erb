@@ -1,6 +1,6 @@
 <%#
-  # most recent file version: v3.5.1
-  # https://github.com/archivesspace/archivesspace/blob/v3.5.1/public/app/views/welcome/show.html.erb
+  # most recent file version: v4.0.0
+  # https://github.com/archivesspace/archivesspace/blob/v4.0.0/public/app/views/welcome/show.html.erb
 %>
 
 <%# BEGIN BC EDIT - Libcal Hours Widget scripts %>
@@ -103,5 +103,5 @@
   <%# END BC EDIT %>
 
     <% ASUtils.find_local_directories('public/views/_welcome_addition.html.erb').each do |template| %>
-        <%= render(:file => template) if File.exists?(template) %>
+        <%= render(:inline => File.read(template)) if File.exists?(template) %>
     <% end %>

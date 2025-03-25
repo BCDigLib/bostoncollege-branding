@@ -1,6 +1,6 @@
 <%#
-  # most recent file version: v3.5.1
-  # https://github.com/archivesspace/archivesspace/blob/v3.5.1/public/app/views/shared/_record_innards.html.erb
+  # most recent file version: v4.0.0
+  # https://github.com/archivesspace/archivesspace/blob/v4.0.0/public/app/views/shared/_record_innards.html.erb
 %>
 
 <!-- Look for '_inherited' and '*_inherited' properties -->
@@ -63,12 +63,12 @@
     <% end %>
 
     <% ASUtils.find_local_directories('public/views/_upper_record_innards.html.erb').each do |template| %>
-      <%= render :file => template if File.exists?(template) %>
+      <%= render :inline => File.read(template) if File.exists?(template) %>
     <% end %>
 </div>
 
-    <div class="acc_holder clear" >
-      <div class="panel-group" id="res_accordion">
+    <div class="acc_holder clear-both" >
+      <div id="res_accordion" class="accordion">
 	<% x = render partial: 'shared/multi_notes', locals: {:types => folder} %>
 	<% unless x.blank? %>
 	<%= render partial: 'shared/accordion_panel', locals: {:p_title =>  t('resource._public.additional'),
@@ -137,7 +137,7 @@
 	<% unless @repo_info.blank? || @repo_info['top']['name'].blank? %>
            <% x= render partial: 'repositories/repository_details' %>
 	    <%= render partial: 'shared/accordion_panel', locals: {:p_title =>  t('repository.details'),
-	    :p_id => 'repo_deets', :p_body => x} %>
+	    :p_id => 'repo_details', :p_body => x} %>
         <% end %>
         <% if @result.kind_of?(Resource) && !@result.related_accessions.blank? %>
           <% x = render partial: 'resources/related_accessions', locals: {:accessions => @result.related_accessions} %>
@@ -153,7 +153,7 @@
         <% end %>
       </div>
       <% ASUtils.find_local_directories('public/views/_lower_record_innards.html.erb').each do |template| %>
-        <%= render :file => template if File.exists?(template) %>
+        <%= render :inline => File.read(template) if File.exists?(template) %>
       <% end %>
     </div>
     <script type="text/javascript" >initialize_accordion(".note_panel", "<%= t('accordion.expand') %>" , "<%= t('accordion.collapse') %>", <%= AppConfig[:pui_expand_all] %>);

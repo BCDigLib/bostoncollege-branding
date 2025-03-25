@@ -1,6 +1,6 @@
 <%#
-  # most recent file version: v3.5.1
-  # https://github.com/archivesspace/archivesspace/blob/v3.5.1/public/app/views/shared/_header.html.erb
+  # most recent file version: v4.0.0
+  # https://github.com/archivesspace/archivesspace/blob/v4.0.0/public/app/views/shared/_header.html.erb
 %>
 
 <%# BEGIN BC EDIT - include custom BC header to top of page %>
@@ -8,8 +8,8 @@
 <%# END BC EDIT %>
 
 <section id="header">
-  <div class="row">
-    <div class="col-sm-8">
+  <div class="d-flex row align-items-center px-4">
+    <div class="col-sm-9">
       <%# BEGIN BC EDIT - Add class to H1 tag %>
       <h1 class="header-title">
       <%# END BC EDIT %>
@@ -22,6 +22,6 @@
         <% end %>
       </h1>
     </div>
-    <!--div class="col-sm-4 hidden-xs"><img class="logo" src="<%= asset_path(AppConfig[:pui_branding_img]) %>" alt="<%= AppConfig[:pui_branding_img_alt_text] %>" /></div-->
+    <!--div class="col-sm-3 d-none d-md-block"><img class="logo" src="<%= asset_path(AppConfig[:pui_branding_img]) %>" alt="<%= AppConfig[:pui_branding_img_alt_text] %>" /></div-->
   </div>
 </section>

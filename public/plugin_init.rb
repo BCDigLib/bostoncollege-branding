@@ -8,7 +8,7 @@ AppConfig[:pui_hide][:accessions] = true
 AppConfig[:pui_hide][:subjects] = true
 AppConfig[:pui_hide][:digital_objects] = false
 AppConfig[:pui_hide][:classifications] = true
-AppConfig[:pui_hide][:container_inventory] = true
+AppConfig[:pui_hide][:container_inventory] = false
 AppConfig[:pui_page_actions_request] = false
 
 # Include custom routes.rb file
@@ -20,8 +20,8 @@ Plugins::add_menu_item('/faq', 'plugin.bostoncollege-branding.faq_menu_label')
 ## OVERRIDE VARIOUS METHODS/ ADD NEW METHODS
 Rails.application.config.after_initialize do
   #
-  # most recent file version: v3.5.1
-  # https://github.com/archivesspace/archivesspace/blob/v3.5.1/public/app/models/record.rb
+  # most recent file version: v4.0.0
+  # https://github.com/archivesspace/archivesspace/blob/v4.0.0/public/app/models/record.rb
   #
   class Record
     # BC NOTE: include "accessrestrict" in list of notes to fetch and render on search results page
@@ -29,8 +29,8 @@ Rails.application.config.after_initialize do
   end
 
   #
-  # most recent file version: v3.5.1
-  # https://github.com/archivesspace/archivesspace/blob/v3.5.1/public/app/controllers/search_controller.rb
+  # most recent file version: v4.0.0
+  # https://github.com/archivesspace/archivesspace/blob/v4.0.0/public/app/controllers/search_controller.rb
   #
   class SearchController < ApplicationController
     # BC NOTE: remove "subjects" and "repository" facets from "Additional filters" list
@@ -41,8 +41,8 @@ Rails.application.config.after_initialize do
   end
 
   #
-  # most recent file version: v3.5.1
-  # https://github.com/archivesspace/archivesspace/blob/v3.5.1/public/app/controllers/resources_controller.rb
+  # most recent file version: v4.0.0
+  # https://github.com/archivesspace/archivesspace/blob/v4.0.0/public/app/controllers/resources_controller.rb
   #
   class ResourcesController < ApplicationController
     # BC NOTE: remove "subjects" from list of resource facet types
@@ -50,8 +50,8 @@ Rails.application.config.after_initialize do
   end
 
   #
-  # most recent file version: v3.5.1
-  # https://github.com/archivesspace/archivesspace/blob/v3.5.1/public/app/controllers/agents_controller.rb
+  # most recent file version: v4.0.0
+  # https://github.com/archivesspace/archivesspace/blob/v4.0.0/public/app/controllers/agents_controller.rb
   #
   class AgentsController < ApplicationController
     # BC NOTE: remove "subjects" from list of agent facet types
@@ -110,8 +110,8 @@ Rails.application.config.after_initialize do
   end
 
   #
-  # most recent file version: v3.5.1
-  # https://github.com/archivesspace/archivesspace/blob/v3.5.1/public/app/controllers/objects_controller.rb
+  # most recent file version: v4.0.0
+  # https://github.com/archivesspace/archivesspace/blob/v4.0.0/public/app/controllers/objects_controller.rb
   #
   class ObjectsController < ApplicationController
     # BC NOTE: remove "subjects" from list of object facet types
@@ -119,8 +119,8 @@ Rails.application.config.after_initialize do
   end
 
   #
-  # most recent file version: v3.5.1
-  # https://github.com/archivesspace/archivesspace/blob/v3.5.1/public/app/controllers/welcome_controller.rb
+  # most recent file version: v4.0.0
+  # https://github.com/archivesspace/archivesspace/blob/v4.0.0/public/app/controllers/welcome_controller.rb
   #
   class WelcomeController < ApplicationController
     # BC NOTE: override current welcome page display

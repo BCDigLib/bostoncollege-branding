@@ -1,7 +1,7 @@
 # encoding: utf-8
 
-# most recent file version: v3.5.1
-# https://github.com/archivesspace/archivesspace/blob/v3.5.1/backend/app/exporters/serializers/ead.rb
+# most recent file version: v4.0.0
+# https://github.com/archivesspace/archivesspace/blob/v4.0.0/backend/app/exporters/serializers/ead.rb
 
 # BC local edits:
 #  see method serialize_languages()
@@ -411,6 +411,12 @@ class EADSerializer < ASpaceExport::Serializer
         origination_attrs[:audience] = 'internal' unless published
         xml.origination(origination_attrs) {
           atts = {:role => relator, :source => source, :rules => rules, :authfilenumber => authfilenumber}
+          if data.pdf_export == true && !relator.nil?
+            relator_translation = I18n.t("enumerations.linked_agent_archival_record_relators.#{relator}")
+            relator_translation = relator if relator_translation.to_s.include?('translation missing')
+
+            atts[:role_translation] = relator_translation
+          end
           atts.reject! {|k, v| v.nil?}
 
           xml.send(node_name, atts) {
@@ -737,13 +743,11 @@ class EADSerializer < ASpaceExport::Serializer
           }
         }
       end
-    # ANW-697: If no Language Text subrecords are available, the Language field translation values for each Language and Script subrecord should be exported, separated by commas, enclosed in <language> elements with associated @langcode and @scriptcode attribute values, and terminated by a period.
     else
       languages = languages.map {|l| l['language_and_script']}.compact
       if !languages.empty?
         xml.langmaterial {
           languages.map {|language|
-            punctuation = language.equal?(languages.last) ? '.' : ', '
             lang_translation = I18n.t("enumerations.language_iso639_2.#{language['language']}", :default => language['language'])
             if language['script']
               xml.language(:langcode => language['language'], :scriptcode => language['script']) {
@@ -754,7 +758,6 @@ class EADSerializer < ASpaceExport::Serializer
                 xml.text(lang_translation)
               }
             end
-            xml.text(punctuation)
           }
         }
       end
@@ -969,7 +972,7 @@ class EADSerializer < ASpaceExport::Serializer
         xml.creation { sanitize_mixed_content( creation, xml, fragments) }
 
         if (val = data.finding_aid_language_note)
-          xml.langusage (fragments << val)
+          xml.langusage (fragments << escape_content(val))
         else
           xml.langusage() {
             xml.text(I18n.t("resource.finding_aid_langusage_label"))
@@ -991,13 +994,13 @@ class EADSerializer < ASpaceExport::Serializer
       if export_rs.length > 0
         xml.revisiondesc {
           export_rs.each do |rs|
-            if rs['description'] && rs['description'].strip.start_with?('<')
-              xml.text (fragments << rs['description'] )
+            if rs['description'] && (rs['description'].strip.start_with?('<change') || rs['description'].strip.start_with?('<list'))
+              xml.text (fragments << escape_content(rs['description']) )
             else
               xml.change(rs['publish'] ? nil : {:audience => 'internal'}) {
                 rev_date = rs['date'] ? rs['date'] : ""
-                xml.date (fragments <<  rev_date )
-                xml.item (fragments << rs['description']) if rs['description']
+                xml.date (fragments <<  escape_content(rev_date))
+                xml.item (fragments << escape_content(rs['description'])) if rs['description']
               }
             end
           end

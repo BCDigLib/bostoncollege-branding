@@ -1,6 +1,6 @@
 <%#
-  # most recent file version: v3.5.1
-  # https://github.com/archivesspace/archivesspace/blob/v3.5.1/public/app/views/shared/_result_record_summary.html.erb
+  # most recent file version: v4.0.0
+  # https://github.com/archivesspace/archivesspace/blob/v4.0.0/public/app/views/shared/_result_record_summary.html.erb
 %>
 
 <div class="recordsummary" style="clear:both">
@@ -79,7 +79,7 @@
     </div>
   <% end %>
 
-  <div class="staff-hidden hide">
+  <div class="staff-hidden d-none">
     <% if result['json']['restricted'] %>
       <p><h4 class='restricted'><%= I18n.t('top_container.restricted') %></h4></p>
     <% end %>
@@ -95,7 +95,7 @@
   <%# END BC EDIT %>
 
   <% if !props.fetch(:full,false)  && result['primary_type'] == 'repository' %>
-    <div><strong><%= t('number_of', { :type => t('resource._plural') }) %></strong> <%= @counts[result.uri]['resource'] %></div>
+    <div><strong><%= t('number_of', :type => t('resource._plural')) %></strong> <%= @counts[result.uri]['resource'] %></div>
   <% end %>
 
   <% if result.primary_type == 'classification' && result.classification_terms? %>
