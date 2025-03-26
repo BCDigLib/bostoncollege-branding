@@ -106,7 +106,7 @@ h6 {
 
 /* Set nav link color*/
 .navbar-default .navbar-nav > li > a {
-    color: #fff;
+    color: #fff !important;
 }
 
 /*Match libweb blue background higlight on hover for menu items*/
@@ -128,7 +128,7 @@ h6 {
 
 /*These are CSS overrides for the buttons*/
 .btn-primary {
-    background-color: #8a100b;
+    background-color: #8a100b !important;
     color: #fff;
     border-color: #8a100b;
 }
