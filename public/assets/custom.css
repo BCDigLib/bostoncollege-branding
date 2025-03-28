@@ -1,6 +1,7 @@
 /* Define basic styles (fonts, colors) for HTML elements */ 
 
 body {
+    font-size: 14px;
     font-family: 'Open Sans', Arial, sans-serif;
         color: #000;
 }	
@@ -333,4 +334,9 @@ form#advanced_search {
 }
 .digital_object{
     color:#000;
+}
+
+#whats-in-container{
+    margin-top: 15px;
+    border: 0px;
 }
