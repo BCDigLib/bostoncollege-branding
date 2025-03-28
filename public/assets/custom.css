@@ -284,7 +284,8 @@ tr.s-lc-whw-loc.s-lc-whw-loc-tr-507.s-lc-whw-libbg-507:hover{ background-color: 
 .s-lc-whw-footnote { color: #555; font-size: 80%; }
 .s-lc-whw-footnote td:hover { background: color #fff!important;}
 /* Below styles can be removed if you are already using Bootstap v3 in host page */
-.s-lc-whw-cont {font-family: "Helvetica Neue",Helvetica,Arial,sans-serif; font-size: 12px; background-color: #8a100b; color:#fff !important}
+.s-lc-whw-cont {font-family: "Helvetica Neue",Helvetica,Arial,sans-serif; font-size: 12px; background-color: #8a100b; color:#fff;}
+.s-lc-whw-cont.table{color:#fff;}
 .s-lc-whw-pr, .s-lc-whw-ne{ padding: 5px 10px; font-size: 12px; line-height: 1.5; border-radius: 3px; color: #333; background-color: #fff; border-color: #ccc; display: none; margin-bottom: 0; font-weight: 400; text-align: center; vertical-align: middle; cursor: pointer; background-image: none; border: 1px solid transparent; white-space: nowrap; }
 .s-lc-whw-pr:disabled { background-color: #efefef; }
 .s-lc-whw-ne:disabled { background-color: #efefef; }
@@ -339,4 +340,12 @@ form#advanced_search {
 #whats-in-container{
     margin-top: 15px;
     border: 0px;
+}
+
+.mapouter{
+    margin-bottom: 15px;
+}
+
+.abstract{
+    margin-bottom:15px;
 }
