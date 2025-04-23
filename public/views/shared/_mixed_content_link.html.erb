@@ -1,0 +1,13 @@
+<%#
+  # most recent file version: v4.0.0
+  # https://github.com/archivesspace/archivesspace/blob/v4.0.0/public/app/views/shared/_mixed_content_link.html.erb
+%>
+<%
+display_string = MixedContentParser.parse(content, url_for(:root))
+if display_string.include? '<span'
+  tag = Nokogiri::HTML::DocumentFragment.parse(display_string)
+%>
+  <span class="<%= tag.css('span').attr('class') %>"> <%= link_to tag.content, app_prefix(uri) %> </span>
+<% else %>
+  <%= link_to display_string, app_prefix(uri) %>
+<% end %>
