@@ -310,7 +310,8 @@ Rails.application.config.after_initialize do
                 end
         if resolved_resource
           ttl = resolved_resource.dig('title')
-          eadloc = resolved_resource.dig('resource','ead_location')
+          eadloc = resolved_resource.dig('resource','_resolved','ead_location') || "test ead location"
+          puts resolved_resource
           cite += " #{strip_mixed_content(ttl)}, #{resource_identifier}. #{strip_mixed_content(eadloc)}"
         end
         unless repository_information['top']['name'].blank?
