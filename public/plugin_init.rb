@@ -308,18 +308,17 @@ Rails.application.config.after_initialize do
                   @citation_container_display ||= parse_container_display(:citation => true).join('; ')
                   ", #{@citation_container_display}."
                 end
+        eadloc = root_node_uri.dig('ead_location') || "test ead location"
         if resolved_resource
           ttl = resolved_resource.dig('title')
-          eadloc = resolved_resource.dig('resource','_resolved','ead_location') || "test ead location"
-          cite+= "THIS IS OUR RESOLVED RESOURCE: #{resolved_resource} END RESOLVED RESOURCE"
-          cite += " #{strip_mixed_content(ttl)}, #{resource_identifier}. #{strip_mixed_content(eadloc)}"
+          cite += " #{strip_mixed_content(ttl)}, #{resource_identifier}. "
         end
         unless repository_information['top']['name'].blank?
           cite += " #{ repository_information['top']['name']}."
         end
       end
       #BEGIN BC EDIT - add handle url to item description for citation modal
-      HTMLEntities.new.decode("#{cite}   #{cite_url_and_timestamp}.")
+      HTMLEntities.new.decode("#{cite}   #{cite_url_and_timestamp}. #{strip_mixed_content(eadloc)}")
       #END BC EDIT
     end
   end
