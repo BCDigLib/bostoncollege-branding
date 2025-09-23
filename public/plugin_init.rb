@@ -308,7 +308,8 @@ Rails.application.config.after_initialize do
                   @citation_container_display ||= parse_container_display(:citation => true).join('; ')
                   ", #{@citation_container_display}."
                 end
-        eadloc = root_node_uri.dig('ead_location') || "test ead location"
+        eadloc = json.fetch('resource').fetch('ref').fetch("ead_location", "no handle found")
+
         if resolved_resource
           ttl = resolved_resource.dig('title')
           cite += " #{strip_mixed_content(ttl)}, #{resource_identifier}. "
