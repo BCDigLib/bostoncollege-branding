@@ -309,7 +309,8 @@ Rails.application.config.after_initialize do
                   ", #{@citation_container_display}."
                 end
         eadloc = json.fetch('resource').fetch("ead_location", "no handle found")
-        cite += "THIS IS THE JSON #{json} THIS ENDS THE JSON"
+        cite += "THIS IS THE JSON for PARENT #{json.fetch('parent')} THIS ENDS THE JSON for PARENT"
+        cite += "THIS IS THE JSON for RESOURCE #{json.fetch('resource')} THIS ENDS THE JSON"
 
         if resolved_resource
           ttl = resolved_resource.dig('title')
