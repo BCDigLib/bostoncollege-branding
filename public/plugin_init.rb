@@ -310,14 +310,15 @@ Rails.application.config.after_initialize do
                 end
         if resolved_resource
           ttl = resolved_resource.dig('title')
-          cite += " #{strip_mixed_content(ttl)}, #{resource_identifier}."
+          eadloc = resolved_resource.dig('ead_location')
+          cite += " #{strip_mixed_content(ttl)}, #{resource_identifier}. #{strip_mixed_content(eadloc)}"
         end
         unless repository_information['top']['name'].blank?
           cite += " #{ repository_information['top']['name']}."
         end
       end
       #BEGIN BC EDIT - add handle url to item description for citation modal
-      HTMLEntities.new.decode("#{cite}   #{cite_url_and_timestamp}. foobar")
+      HTMLEntities.new.decode("#{cite}   #{cite_url_and_timestamp}.")
       #END BC EDIT
     end
   end
