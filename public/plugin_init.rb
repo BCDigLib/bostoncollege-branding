@@ -294,4 +294,31 @@ Rails.application.config.after_initialize do
       info
     end
   end
+  class ArchivalObject < Record
+    def cite_item_description
+      cite = note('prefercite')
+      if !cite.blank?
+        cite = strip_mixed_content(cite['note_text'])
+      else
+        cite = strip_mixed_content(display_string)
+        cite += identifier.blank? ? '' : ", #{identifier}"
+        cite += if container_display.blank? || container_display.length > 5
+                  '.'
+                else
+                  @citation_container_display ||= parse_container_display(:citation => true).join('; ')
+                  ", #{@citation_container_display}."
+                end
+        if resolved_resource
+          ttl = resolved_resource.dig('title')
+          cite += " #{strip_mixed_content(ttl)}, #{resource_identifier}."
+        end
+        unless repository_information['top']['name'].blank?
+          cite += " #{ repository_information['top']['name']}."
+        end
+      end
+      #BEGIN BC EDIT - add handle url to item description for citation modal
+      HTMLEntities.new.decode("#{cite}   #{cite_url_and_timestamp}. foobar")
+      #END BC EDIT
+    end
+  end
 end
