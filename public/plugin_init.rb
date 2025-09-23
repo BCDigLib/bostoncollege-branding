@@ -309,6 +309,7 @@ Rails.application.config.after_initialize do
                   ", #{@citation_container_display}."
                 end
         eadloc = json.fetch('resource').fetch("ead_location", "no handle found")
+        cite += "THIS IS THE JSON #{json} THIS ENDS THE JSON"
 
         if resolved_resource
           ttl = resolved_resource.dig('title')
@@ -319,7 +320,7 @@ Rails.application.config.after_initialize do
         end
       end
       #BEGIN BC EDIT - add handle url to item description for citation modal
-      HTMLEntities.new.decode("#{cite}   #{cite_url_and_timestamp}. #{strip_mixed_content(eadloc)}")
+      HTMLEntities.new.decode("#{cite}   #{cite_url_and_timestamp}.")
       #END BC EDIT
     end
   end
