@@ -26,7 +26,7 @@
   </div>
 </div>
 
-    <%# BEGIN BC EDIT - remove title and subject_text from search dropdown %>
+    <%# BEGIN BC EDIT - remove title, identifier and subject_text from search dropdown %>
     <%= render partial: 'shared/search', locals: {
       :search_url => "/search",
       :title => t('archive._plural'),
@@ -41,7 +41,7 @@
             ["#{t('search_results.filter.creators')}",'creators_text'],
            #["#{t('search_results.filter.subjects')}",'subjects_text'],
             ["#{t('search_results.filter.notes')}", 'notes'],
-            ["#{t('search_results.filter.identifier')}", 'identifier']
+            #["#{t('search_results.filter.identifier')}", 'identifier']
            ]
     } %>
     <%# END BC EDIT %>

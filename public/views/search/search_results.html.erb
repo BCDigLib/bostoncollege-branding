@@ -40,7 +40,7 @@
         <%= @search[:search_statement].html_safe %>
       <% end %>
 
-      <%# BEGIN BC EDIT - remove title and subject_text from search dropdown %>
+      <%# BEGIN BC EDIT - remove title, identifier and subject_text from search dropdown %>
       <div id="refineSearchPanel" class="container refinesearch" aria-hidden="true" style="display:none;">
         <%= render partial: 'shared/search', locals: {:search_url => @base_search,
                                                       :title => t('archive._plural'),
@@ -52,7 +52,7 @@
                                                                          ["#{t('search_results.filter.creators')}",'creators_text'],
                                                                          #["#{t('search_results.filter.subjects')}",'subjects_text'],
                                                                          ["#{t('search_results.filter.notes')}", 'notes'],
-                                                                         ["#{t('search_results.filter.identifier')}", 'identifier'] ],
+                                                                         #["#{t('search_results.filter.identifier')}", 'identifier'] ],
                                                       :show_header => false } %>
       <%# END BC EDIT %>
       </div>
