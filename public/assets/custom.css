@@ -349,3 +349,8 @@ form#advanced_search {
 .abstract{
     margin-bottom:15px;
 }
+
+/* Hide plus/minus toggles by default */
+.plusminus {
+    display: none !important;
+}
