@@ -215,7 +215,7 @@ Rails.application.config.after_initialize do
 
     def show
       @page_title = I18n.t 'brand.welcome_page_title'
-      @search = Search.new(params)
+      #@search = Search.new(params)
       uri = "/repositories/2"
       resources = {}
       query = "(id:\"#{uri}\" AND publish:true)"
