@@ -354,3 +354,7 @@ form#advanced_search {
 .plusminus {
     display: none !important;
 }
+
+.plusminus_label {
+    display: none !important;
+}

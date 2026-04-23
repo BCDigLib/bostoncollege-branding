@@ -215,7 +215,7 @@ Rails.application.config.after_initialize do
 
     def show
       @page_title = I18n.t 'brand.welcome_page_title'
-      #@search = Search.new(params)
+      @search = Search.new(params)
       uri = "/repositories/2"
       resources = {}
       query = "(id:\"#{uri}\" AND publish:true)"
@@ -236,7 +236,7 @@ Rails.application.config.after_initialize do
         @sublist_action = "/repositories/2/"
         @result['count'] = resources
         #@page_title = strip_mixed_content(@result['name'])
-        #@search = Search.new(params)
+        @search = Search.new(params)
 
         render
 
