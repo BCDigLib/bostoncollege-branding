@@ -9,7 +9,7 @@ AppConfig[:pui_hide][:subjects] = true
 AppConfig[:pui_hide][:digital_objects] = false
 AppConfig[:pui_hide][:classifications] = true
 AppConfig[:pui_hide][:container_inventory] = false
-AppConfig[:pui_page_actions_request] = false
+AppConfig[:pui_page_actions_request] = true
 
 # Include custom routes.rb file
 Plugins::extend_aspace_routes(File.join(File.dirname(__FILE__), "routes.rb"))
