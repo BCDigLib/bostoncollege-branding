@@ -1,7 +1,7 @@
 # encoding: utf-8
 
-# most recent file version: v4.0.0
-# https://github.com/archivesspace/archivesspace/blob/v4.0.0/backend/app/exporters/serializers/ead.rb
+# most recent file version: v4.2.1
+# https://github.com/archivesspace/archivesspace/blob/v4.2.1/backend/app/exporters/serializers/ead.rb
 
 # BC local edits:
 #  see method serialize_languages()

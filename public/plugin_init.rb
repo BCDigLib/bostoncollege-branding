@@ -11,6 +11,11 @@ AppConfig[:pui_hide][:classifications] = true
 AppConfig[:pui_hide][:container_inventory] = false
 AppConfig[:pui_page_actions_request] = false
 
+# BC favicons (files in public/assets/), using the favicon options added in v4.2.0.
+# These replace the old shared/_favicon.html.erb view override.
+AppConfig[:pui_png_favicon] = '/assets/favicon.png'
+AppConfig[:pui_svg_favicon] = '/assets/favicon.svg'
+
 # Include custom routes.rb file
 Plugins::extend_aspace_routes(File.join(File.dirname(__FILE__), "routes.rb"))
 
@@ -20,8 +25,8 @@ Plugins::add_menu_item('/faq', 'plugin.bostoncollege-branding.faq_menu_label')
 ## OVERRIDE VARIOUS METHODS/ ADD NEW METHODS
 Rails.application.config.after_initialize do
   #
-  # most recent file version: v4.0.0
-  # https://github.com/archivesspace/archivesspace/blob/v4.0.0/public/app/models/record.rb
+  # most recent file version: v4.2.1
+  # https://github.com/archivesspace/archivesspace/blob/v4.2.1/public/app/models/record.rb
   #
   class Record
     # BC NOTE: include "accessrestrict" in list of notes to fetch and render on search results page
@@ -29,8 +34,8 @@ Rails.application.config.after_initialize do
   end
 
   #
-  # most recent file version: v4.0.0
-  # https://github.com/archivesspace/archivesspace/blob/v4.0.0/public/app/controllers/search_controller.rb
+  # most recent file version: v4.2.1
+  # https://github.com/archivesspace/archivesspace/blob/v4.2.1/public/app/controllers/search_controller.rb
   #
   class SearchController < ApplicationController
     # BC NOTE: remove "subjects" and "repository" facets from "Additional filters" list
@@ -41,8 +46,8 @@ Rails.application.config.after_initialize do
   end
 
   #
-  # most recent file version: v4.0.0
-  # https://github.com/archivesspace/archivesspace/blob/v4.0.0/public/app/controllers/resources_controller.rb
+  # most recent file version: v4.2.1
+  # https://github.com/archivesspace/archivesspace/blob/v4.2.1/public/app/controllers/resources_controller.rb
   #
   class ResourcesController < ApplicationController
     # BC NOTE: remove "subjects" from list of resource facet types
@@ -50,8 +55,8 @@ Rails.application.config.after_initialize do
   end
 
   #
-  # most recent file version: v4.0.0
-  # https://github.com/archivesspace/archivesspace/blob/v4.0.0/public/app/controllers/agents_controller.rb
+  # most recent file version: v4.2.1
+  # https://github.com/archivesspace/archivesspace/blob/v4.2.1/public/app/controllers/agents_controller.rb
   #
   class AgentsController < ApplicationController
     # BC NOTE: remove "subjects" from list of agent facet types
@@ -110,8 +115,8 @@ Rails.application.config.after_initialize do
   end
 
   #
-  # most recent file version: v4.0.0
-  # https://github.com/archivesspace/archivesspace/blob/v4.0.0/public/app/controllers/objects_controller.rb
+  # most recent file version: v4.2.1
+  # https://github.com/archivesspace/archivesspace/blob/v4.2.1/public/app/controllers/objects_controller.rb
   #
   class ObjectsController < ApplicationController
     # BC NOTE: remove "subjects" from list of object facet types
@@ -119,8 +124,8 @@ Rails.application.config.after_initialize do
   end
 
   #
-  # most recent file version: v4.0.0
-  # https://github.com/archivesspace/archivesspace/blob/v4.0.0/public/app/controllers/welcome_controller.rb
+  # most recent file version: v4.2.1
+  # https://github.com/archivesspace/archivesspace/blob/v4.2.1/public/app/controllers/welcome_controller.rb
   #
   class WelcomeController < ApplicationController
     # BC NOTE: override current welcome page display
