@@ -1,6 +1,6 @@
 <%#
-  # most recent file version: v4.0.0
-  # https://github.com/archivesspace/archivesspace/blob/v4.0.0/public/app/views/welcome/show.html.erb
+  # most recent file version: v4.2.1
+  # https://github.com/archivesspace/archivesspace/blob/v4.2.1/public/app/views/welcome/show.html.erb
 %>
 
 <%# BEGIN BC EDIT - Libcal Hours Widget scripts %>
@@ -21,7 +21,7 @@
 
 <div class="row">
   <div class="col-sm-12">
-    <h2><%= t('brand.welcome_head') %></h2>
+    <h1><%= t('brand.welcome_head') %></h1>
       <div><%= t('brand.welcome_blurb').html_safe %></div>
   </div>
 </div>
@@ -102,5 +102,5 @@
   <%# END BC EDIT %>
 
     <% ASUtils.find_local_directories('public/views/_welcome_addition.html.erb').each do |template| %>
-        <%= render(:inline => File.read(template)) if File.exists?(template) %>
+        <%= render(:template => ViewHelper.relative_plugin_view_path(template)) if File.exists?(template) %>
     <% end %>

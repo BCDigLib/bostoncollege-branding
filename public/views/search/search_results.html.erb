@@ -1,6 +1,6 @@
 <%#
-  # most recent file version: v4.0.0
-  # https://github.com/archivesspace/archivesspace/blob/v4.0.0/public/app/views/search/search_results.html.erb
+  # most recent file version: v4.2.1
+  # https://github.com/archivesspace/archivesspace/blob/v4.2.1/public/app/views/search/search_results.html.erb
 %>
 
 <% results_type = (defined?(@results_type) ? @results_type : t('search_results.results')) %>
@@ -8,7 +8,7 @@
   <div class="col-sm-12">
      <%= render partial: 'shared/breadcrumbs' %>
   <% if defined?(@search_title) %>
-  <h2><%= @search_title %></h2>
+  <h1><%= @search_title %></h1>
   <% end %>
 
   <%# BEGIN BC EDIT - remove title and subject_text from search dropdown %>
@@ -25,7 +25,7 @@
                                                                        ["#{t('search_results.filter.notes')}", 'notes'],
                                                                        #["#{t('search_results.filter.identifier')}", 'identifier'] 
                                                                       ],
-                                                    :header_size => '2',
+                                                    :header_size => '1',
                                                     :show_header => true } %>
   <% else %>
   <%# END BC EDIT %>
@@ -62,8 +62,8 @@
   <% end %>
 
   <% if defined?(@results) %>
-  <h2><%= t('search_results.results_head', :type => results_type, :start => @results['offset_first'],
-         :end => @results['offset_last'], :total => @results['total_hits'] )  %></h2>
+  <h1><%= t('search_results.results_head', :type => results_type, :start => @results['offset_first'],
+         :end => @results['offset_last'], :total => @results['total_hits'] )  %></h1>
   <% end %>
   <% end %>
   </div>
@@ -87,7 +87,7 @@
     </div>
     <div class="row search-results"><div class="col-sm-12">
 
-    <a name="searchresults" id="searchresults"></a>
+    <a id="searchresults" tabindex="-1"></a>
 
     <% @results.records.each do |result| %>
       <%= render partial: 'shared/result', locals: {:result => result, :props => (@result_props || {}).merge({:full => false})} %>

@@ -1,6 +1,6 @@
 <%#
-  # most recent file version: v4.0.0
-  # https://github.com/archivesspace/archivesspace/blob/v4.0.0/public/app/views/repositories/_repository.html.erb
+  # most recent file version: v4.2.1
+  # https://github.com/archivesspace/archivesspace/blob/v4.2.1/public/app/views/repositories/_repository.html.erb
 %>
 
 <% if !full %>
@@ -19,9 +19,15 @@
 				<% if full %>
 					<%= render partial: 'repositories/full_repo', locals: {:info => result['repo_info'], :url => result['url']} %>
 				<% else %>
-					<div>
-						<strong>Number of <%= t('resource._plural') %>:</strong> <%= result['count'] %>
+					<div class="my-2">
+						<strong><%= t('resource._plural', :count => result['count']) %>:</strong> <%= result['count'] %>
 					</div>
+					<% if result.dig('repo_info', 'top', 'description').present? %>
+					<div class="repository-description d-flex flex-column m-0">
+						<strong><%= t('repositories._public.about', default: "About:") %></strong>
+						<%= simple_format(result.dig('repo_info', 'top', 'description')) %>
+					</div>
+					<% end %>
 				<% end %>
 			</div>
 		</div>
